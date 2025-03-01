@@ -2,7 +2,7 @@ import { FaUsers, FaComments, FaBriefcase } from "react-icons/fa";
 
 const Home = () => {
   return (
-    <div className="min-h-screen bg-gray-100">
+    <div className="min-h-screen bg-black-100">
       {/* Navigation Bar */}
       <nav className="bg-blue-600 p-4 shadow-md">
         <div className="container mx-auto flex justify-between items-center">
