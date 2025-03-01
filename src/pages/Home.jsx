@@ -8,8 +8,10 @@ const Home = () => {
         <div className="container mx-auto flex justify-between items-center">
           <h1 className="text-white text-2xl font-bold">Alumni Connect</h1>
           <div>
+
             <button className="mr-4 bg-white text-blue-600 px-4 py-2 rounded">Login</button>
             <button className="bg-white text-blue-600 px-4 py-2 rounded">Register</button>
+
           </div>
         </div>
       </nav>
