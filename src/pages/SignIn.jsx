@@ -89,6 +89,7 @@ const SignIn = () => {
                             className="w-full p-2 outline-none border-none"
                         />
                     </div>
+                    {error && <p className="text-red-700">{error}</p>}
                     <button
                         type="submit"
                         className="w-full bg-blue-600 text-white py-2 rounded-lg hover:bg-blue-700 transition"
@@ -96,7 +97,6 @@ const SignIn = () => {
                         {loading ? "Loading..." : "Sign In"}
                     </button>
                 </form>
-                {error ? error : ""}
                 <div className="text-center mt-4">
                     <p className="text-gray-600">
                         Don't have an account?{" "}
