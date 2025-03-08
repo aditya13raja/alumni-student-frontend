@@ -31,6 +31,22 @@ const userSlice = createSlice({
             state.error = action.payload;
             state.loading = false;
         },
+
+        // Create reducer for sign out
+        signOutUserStart: (state) => {
+            state.loading = true;
+        },
+
+        signOutUserSuccess: (state) => {
+            state.currentUser = null;
+            state.loading = false;
+            state.error = null;
+        },
+
+        signOutUserFailure: (state, action) => {
+            state.error = action.payload;
+            state.loading = false;
+        }, 
     }
 })
 
@@ -39,6 +55,9 @@ export const {
     authStart,
     authSuccess,
     authFailure,
+    signOutUserStart,
+    signOutUserSuccess,
+    signOutUserFailure,
 } = userSlice.actions;
 
 // Export all reducers

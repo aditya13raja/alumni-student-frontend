@@ -3,12 +3,16 @@ import { FaCircleUser, FaRoad, FaTrophy } from "react-icons/fa6";
 import { PiDotsThreeOutlineVerticalFill } from "react-icons/pi";
 import { IoMdHome } from "react-icons/io";
 import { FaSearch, FaDatabase, FaSuitcase } from "react-icons/fa";
-import { Link } from "react-router-dom";
-import { useSelector } from "react-redux";
+import { Link, useNavigate } from "react-router-dom";
+import { useDispatch, useSelector } from "react-redux";
+import { signOutUserFailure, signOutUserStart, signOutUserSuccess } from "../utils/user/userSlice";
 
 export default function Sidebar() {
     const [menuOpen, setMenuOpen] = useState(false);
     const menuRef = useRef(null);
+
+    const dispatch = useDispatch();
+    const navigate = useNavigate();
 
     const currentUser = useSelector((state) => state.user.currentUser)
 
@@ -30,7 +34,22 @@ export default function Sidebar() {
     }, []);
 
     const handleSignOut = async () => {
-        console.log("Sign Out!!!")
+        try {
+            dispatch(signOutUserStart);
+            const res = await fetch('/api/auth/signout');
+            const data = await res.json();
+
+            if (!data.message) {
+                dispatch(signOutUserFailure("Not able to signout"))
+                return;
+            }
+
+            dispatch(signOutUserSuccess());
+            navigate("/signin")
+        } catch (error) {
+            dispatch(signOutUserFailure(error.message));
+        }
+
     }
 
     return (
