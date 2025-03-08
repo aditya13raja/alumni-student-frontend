@@ -29,6 +29,10 @@ export default function Sidebar() {
         return () => document.removeEventListener("mousedown", handleClickOutside);
     }, []);
 
+    const handleSignOut = async () => {
+        console.log("Sign Out!!!")
+    }
+
     return (
         <div className="flex flex-col relative rounded-2xl w-60 h-[98vh] bg-lightbg my-[1vh] py-[5vh] px-5">
             {/* Logo */}
@@ -84,12 +88,12 @@ export default function Sidebar() {
                 {/* Drop-Up Menu */}
                 {menuOpen && (
                     <div className="absolute bottom-16 right-4 bg-black shadow-lg rounded-md p-3 w-40 text-center">
-                        <Link to="/signup" className="block py-2 hover:bg-blue-200 rounded-md">
-                            Sign Up
+                        <Link to="/profile" className="block py-2 hover:bg-blue-200 rounded-md">
+                            Profile
                         </Link>
-                        <Link to="/signin" className="block py-2 hover:bg-blue-200 rounded-md">
-                            Sign In
-                        </Link>
+                        <p onClick={handleSignOut}>
+                            Sign out
+                        </p>
                     </div>
                 )}
 
