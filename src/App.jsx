@@ -9,6 +9,7 @@ import Topics from "./pages/Topics";
 import RightSidebar from "./components/RightSidebar";
 import Stories from "./pages/Stories";
 import Resources from "./pages/Resources";
+import PrivateRoute from "./components/PrivateRoute";
 
 function App() {
     return (
@@ -22,14 +23,16 @@ function App() {
                 {/* Main content (Expands to fill available space) */}
                 <div className="flex-1 p-6">
                     <Routes>
-                        <Route path="/" element={<Home />} />
-                        <Route path="/profile" element={<Profile />} />
                         <Route path="/signin" element={<SignIn />} />
                         <Route path="/signup" element={<SignUp />} />
-                        <Route path="/jobs" element={<Jobs />} />
-                        <Route path="/topics" element={<Topics />} />
-                        <Route path="/stories" element={<Stories />} /> {/* Added Stories Route */}
-                        <Route path="/resources" element={<Resources />} /> {/* Added Resources Route" */}
+                        <Route element={<PrivateRoute />}>
+                            <Route path="/" element={<Home />} />
+                            <Route path="/profile" element={<Profile />} />
+                            <Route path="/jobs" element={<Jobs />} />
+                            <Route path="/topics" element={<Topics />} />
+                            <Route path="/stories" element={<Stories />} />
+                            <Route path="/resources" element={<Resources />} />
+                        </Route>
                     </Routes>
                 </div>
 

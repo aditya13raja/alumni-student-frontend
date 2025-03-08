@@ -14,9 +14,9 @@ export default function Sidebar() {
 
     // TODO: remove this with destructured one, after protecting routes
     // Save with optional chaining, to allow going home when not logged in
-    const first_name = currentUser?.first_name || "Full"
-    const last_name = currentUser?.last_name || "Name"
-    const username = currentUser?.username || "username"
+    const first_name = currentUser?.first_name || "Guest"
+    const last_name = currentUser?.last_name || "User"
+    const username = currentUser?.username || "guest"
 
     // Close dropdown when clicking outside
     useEffect(() => {
