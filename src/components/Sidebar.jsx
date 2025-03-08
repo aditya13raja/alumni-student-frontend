@@ -23,7 +23,9 @@ export default function Sidebar() {
   return (
     <div className="flex flex-col relative rounded-2xl w-60 h-[98vh] bg-lightbg my-[1vh] py-[5vh] px-5">
       {/* Logo */}
-      <div className="text-5xl absolute top-4">Logo</div>
+      <div className="absolute top-4 w-50 h-15">
+        <img src="./src/assets/logo.jpeg" alt="Logo" className="text-5xl" /> 
+      </div>
 
       {/* Sections */}
       <div className="py-20 text-2xl">
@@ -68,6 +70,15 @@ export default function Sidebar() {
             <p>Stories</p>
           </Link>
         </div>
+
+        <div className="flex flex-row gap-3 items-center hover:bg-secondary p-3 mb-4 rounded-full">
+  <Link to="/profile" className="flex items-center space-x-2">
+    <FaCircleUser className="text-primary text-3xl" />
+    <p>Profile</p>
+  </Link>
+</div>
+
+
       </div>
 
       {/* Account Section - Fixed at the Absolute Bottom */}
