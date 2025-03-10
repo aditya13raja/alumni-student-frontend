@@ -63,42 +63,42 @@ const storiesData = [
     author: "Aman",
     title: "Data Science Adventures",
     description: "Exploring the world of AI, ML, and Big Data.",
-    image: "./src/image.png", // Replace with actual image URL
+    image: "./src/assets/image.png", // Replace with actual image URL
     link: "/stories/1",
   },
   {
     author: "Aditya",
     title: "Journey into Web Development",
     description: "A developer's experience transitioning into full-stack development.",
-    image: "./src/image.png", // Replace with actual image URL
+    image: "./src/assets/image.png", // Replace with actual image URL  
     link: "/stories/2",
   },
   {
     author: "Riya",
     title: "Data Science Adventures",
     description: "Exploring the world of AI, ML, and Big Data.",
-    image: "./src/image.png", // Replace with actual image URL
+    image: "./src/assets/image.png", // Replace with actual image URL  
     link: "/stories/3",
   },
   {
     author: "Vishal",
     title: "Journey into Web Development",
     description: "A developer's experience transitioning into full-stack development.",
-    image: "./src/image.png", // Replace with actual image URL
+    image: "./src/assets/image.png", // Replace with actual image URL
     link: "/stories/1",
   },
   {
     author: "Nishtha",
     title: "Data Science Adventures",
     description: "Exploring the world of AI, ML, and Big Data.",
-    image: "./src/image.png", // Replace with actual image URL
+    image: "./src/assets/image.png", // Replace with actual image URL
     link: "/stories/2",
   },
   {
     author: "Ashutosh",
     title: "From Designer to UX/UI Expert",
     description: "Insights on creating seamless user experiences.",
-    image: "./src/image.png", // Replace with actual image URL
+    image: "./src/assets/image.png", // Replace with actual image URL
     link: "/stories/3",
   },
   
