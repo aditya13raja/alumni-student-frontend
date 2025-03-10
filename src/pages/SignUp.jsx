@@ -1,6 +1,12 @@
 import { useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
 {/*import { FaLock } from "react-icons/fa";*/}
 import { Link, useNavigate } from "react-router-dom";
+import { 
+    authFailure, 
+    authStart, 
+    authSuccess 
+} from "../utils/user/userSlice";
 
 const SignUp = () => {
     // Usestate to store form data with initial values
@@ -18,8 +24,10 @@ const SignUp = () => {
     });
 
     // State variable for error and loading
-    const [error, setError] = useState(null)
-    const [loading, setLoading] = useState(false)
+    const { loading, error } = useSelector((state) => state.user);
+
+    // Create dispatch variable
+    const dispatch = useDispatch();
 
     // Create instance of useNavigate hook
     const navigate = useNavigate();
@@ -39,7 +47,7 @@ const SignUp = () => {
 
         // Post(send) form data to backend
         try {
-            setLoading(true);
+            dispatch(authStart());
             
             // Making post request
             const res = await fetch("api/auth/signup", {
@@ -55,21 +63,18 @@ const SignUp = () => {
             console.log(data)
             
             // If unsuccessful to get data
-            if (data.error != "") {
-                setLoading(false)
-                setError(data.error)
+            if (data.error) {
+                dispatch(authFailure(data.error));
+                return;
             }
 
-            setLoading(false)
-            setError(null)
-
+            dispatch(authSuccess(data.user))
             // redirect to home after signup
             navigate('/')
         }
         // catch if error occor
         catch (error) {
-            setLoading(false)
-            setError(error.message)
+            dispatch(authFailure(error.message))
         }
     };
 
@@ -163,6 +168,7 @@ const SignUp = () => {
                         onChange={handleChange}
                         className="w-full p-2 border rounded-lg"
                     />
+                    {error && <p className="text-red-700">{error}</p>}
                     <button
                         type="submit"
                         disabled={loading}
@@ -171,7 +177,6 @@ const SignUp = () => {
                         {loading ? "Loading.." : "Create Account"}
                     </button>
                 </form>
-                {error ? error : ""}
                 <div className="text-center mt-4">
                     <p className="text-gray-600">
                         Already have an account? {" "}

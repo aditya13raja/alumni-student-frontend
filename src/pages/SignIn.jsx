@@ -1,14 +1,22 @@
 import { useState } from "react";
 import { FaUser, FaLock } from "react-icons/fa";
+import { useDispatch, useSelector } from "react-redux";
 import { Link, useNavigate } from "react-router-dom";
+import { 
+    authFailure, 
+    authStart, 
+    authSuccess 
+} from "../utils/user/userSlice";
 
 const SignIn = () => {
     const [formData, setFormData] = useState({
         username: "",
         password: "",
     });
-    const [loading, setLoading] = useState(false);
-    const [error, setError] = useState(null);
+    const { loading, error } = useSelector((state) => state.user);
+    
+    // Create dispatch variable to dispatch reducers
+    const dispatch = useDispatch();
 
     // Create instance of useNavigate hook
     const navigate = useNavigate();
@@ -23,7 +31,7 @@ const SignIn = () => {
 
         // Make post request to authenticate
         try {
-            setLoading(true)
+            dispatch(authStart())
 
             // Send form Data
             const res = await fetch("/api/auth/signin", {
@@ -39,19 +47,18 @@ const SignIn = () => {
             console.log(data)
             
             // If data gives error
-            if (data.error != "") {
-                setLoading(false)
-                setError(data.error)
+            if (data.error) {
+                dispatch(authFailure(data.error))
+                return; // Stop here to prevent naviagtion to home 
             }
 
-            setLoading(false)
-            setError(null)
+            // Save user info to redux-store
+            dispatch(authSuccess(data.user))
 
             // Navigate to home page after signin
             navigate('/')
         } catch (error) {
-            setLoading(false)
-            setError(error.message)
+            dispatch(authFailure(error.message))
         }
     };
 
@@ -82,6 +89,7 @@ const SignIn = () => {
                             className="w-full p-2 outline-none border-none"
                         />
                     </div>
+                    {error && <p className="text-red-700">{error}</p>}
                     <button
                         type="submit"
                         className="w-full bg-blue-600 text-white py-2 rounded-lg hover:bg-blue-700 transition"
@@ -89,7 +97,6 @@ const SignIn = () => {
                         {loading ? "Loading..." : "Sign In"}
                     </button>
                 </form>
-                {error ? error : ""}
                 <div className="text-center mt-4">
                     <p className="text-gray-600">
                         Don`t have an account?{" "}

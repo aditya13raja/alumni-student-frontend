@@ -10,6 +10,7 @@ import RightSidebar from "./components/RightSidebar";
 import Stories from "./pages/Stories";
 import Resources from "./pages/Resources";
 import Roadmap from "./pages/Roadmap";
+import PrivateRoute from "./components/PrivateRoute";
 
 function App() {
     return (
@@ -31,6 +32,16 @@ function App() {
                         <Route path="/stories" element={<Stories />} />
                         <Route path="/resources" element={<Resources />} />
                         <Route path="/roadmap" element={<Roadmap />} />
+                        <Route path="/signin" element={<SignIn />} />
+                        <Route path="/signup" element={<SignUp />} />
+                        <Route element={<PrivateRoute />}>
+                            <Route path="/" element={<Home />} />
+                            <Route path="/profile" element={<Profile />} />
+                            <Route path="/jobs" element={<Jobs />} />
+                            <Route path="/topics" element={<Topics />} />
+                            <Route path="/stories" element={<Stories />} />
+                            <Route path="/resources" element={<Resources />} />
+                        </Route>
                     </Routes>
                 </div>
 
