@@ -1,6 +1,5 @@
 import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
 import Home from "./pages/Home";
-import ProfilePage from "./pages/ProfilePage"; 
 import SignIn from "./pages/SignIn";
 import SignUp from "./pages/SignUp";
 import Sidebar from "./components/Sidebar";
@@ -10,6 +9,7 @@ import RightSidebar from "./components/RightSidebar";
 import Stories from "./pages/Stories";
 import Resources from "./pages/Resources";
 import Roadmap from "./pages/Roadmap";
+import Profile from "./pages/Profile";
 import PrivateRoute from "./components/PrivateRoute";
 
 function App() {
@@ -24,24 +24,17 @@ function App() {
                 <div className="flex-1 p-6">
                     <Routes>
                         <Route path="/" element={<Home />} />
-                        <Route path="/profile" element={<ProfilePage />} />
                         <Route path="/signin" element={<SignIn />} />
                         <Route path="/signup" element={<SignUp />} />
-                        <Route path="/jobs" element={<Jobs />} />
-                        <Route path="/topics" element={<Topics />} />
-                        <Route path="/stories" element={<Stories />} />
-                        <Route path="/resources" element={<Resources />} />
-                        <Route path="/roadmap" element={<Roadmap />} />
-                        <Route path="/signin" element={<SignIn />} />
-                        <Route path="/signup" element={<SignUp />} />
-                        <Route element={<PrivateRoute />}>
+                        {/*<Route element={<PrivateRoute />}>  TODO: Remove comment later */}
                             <Route path="/" element={<Home />} />
                             <Route path="/profile" element={<Profile />} />
                             <Route path="/jobs" element={<Jobs />} />
                             <Route path="/topics" element={<Topics />} />
                             <Route path="/stories" element={<Stories />} />
+                            <Route path="/roadmap" element={<Roadmap />} />
                             <Route path="/resources" element={<Resources />} />
-                        </Route>
+                        {/*</Route> */}
                     </Routes>
                 </div>
 
