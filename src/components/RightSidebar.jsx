@@ -2,7 +2,8 @@ import { FaBell, FaEnvelope, FaUsers, FaChartBar } from "react-icons/fa";
 
 export default function RightSidebar() {
   return (
-    <div className="flex flex-col relative rounded-2xl w-60 h-[98vh] bg-lightbg my-[1vh] py-[5vh] px-5 fixed right-0 top-0">
+    <div className="right-sidebar flex flex-col relative rounded-2xl w-60 h-[98vh] bg-black my-[1vh] py-[5vh] px-5 fixed right-0 top-0">
+
       {/* Title */}
       <div className="text-2xl font-semibold mb-4">Activity</div>
 

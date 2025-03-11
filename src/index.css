@@ -1,19 +1,33 @@
 @import "tailwindcss";
 @theme {
     --color-white: #f9e8e1;
-    --color-background: #1b1818;
+    --color-background: #000000; /* Updated to black */
     --color-lightbg: #221f1f;
     --color-primary: #4a88de;
     --color-secondary: #1a263b;
 }
-body {
-}
 
+body {
+    background-color: var(--color-background); /* Apply black background */
+    color: var(--color-white); /* Ensure text is readable */
+}
 
 .search-bar input {
     padding: 8px;
     font-size: 16px;
     width: 100%;
     margin-bottom: 20px;
-  }
-  
+}
+
+
+@media (max-width: 768px) {
+    /* Hide text in the left sidebar */
+    .left-sidebar p {
+        display: none;
+    }
+
+    /* Completely hide the right sidebar */
+    .right-sidebar {
+        display: none;
+    }
+}

@@ -33,14 +33,14 @@ const Stories = () => {
         {filteredStories.map((story, index) => (
           <div
             key={index}
-            className="bg-white rounded-lg shadow-md p-6 flex flex-col items-center transition duration-300 ease-in-out transform hover:bg-blue-100 hover:scale-105 cursor-pointer"
+            className="bg-gray rounded-lg shadow-md p-6 flex flex-col items-center transition duration-300 ease-in-out transform hover:bg-blue-100 hover:scale-105 cursor-pointer"
           >
             <img
               src={story.image}
               alt={story.author}
               className="w-24 h-24 rounded-full mb-4"
             />
-            <h2 className="text-2xl font-semibold text-gray-800">{story.author}</h2>
+            <h2 className="text-2xl font-semibold text-white-800">{story.author}</h2>
             <div className="flex space-x-3 mt-2">
               <FaFacebook className="text-gray-500 cursor-pointer hover:text-blue-600 transition duration-300" />
               <FaTwitter className="text-gray-500 cursor-pointer hover:text-blue-400 transition duration-300" />

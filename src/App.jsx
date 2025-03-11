@@ -1,5 +1,6 @@
-import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
+import { BrowserRouter, Route, Routes } from "react-router-dom";
 import Home from "./pages/Home";
+import Profile from "./pages/Profile";
 import SignIn from "./pages/SignIn";
 import SignUp from "./pages/SignUp";
 import Sidebar from "./components/Sidebar";
@@ -9,39 +10,38 @@ import RightSidebar from "./components/RightSidebar";
 import Stories from "./pages/Stories";
 import Resources from "./pages/Resources";
 import Roadmap from "./pages/Roadmap";
-import Profile from "./pages/Profile";
 import PrivateRoute from "./components/PrivateRoute";
 
 function App() {
     return (
-        <Router>
-            <div className="flex min-h-screen bg-gray-900 text-white">
+        <BrowserRouter>
+            {/* Full screen container */}
+            <div className="flex min-h-screen bg-background text-white">
                 
-                {/* Left Sidebar */}
+                {/* Left Sidebar (Extreme Left) */}
                 <Sidebar />
 
-                {/* Main Content */}
+                {/* Main content (Expands to fill available space) */}
                 <div className="flex-1 p-6">
                     <Routes>
-                        <Route path="/" element={<Home />} />
                         <Route path="/signin" element={<SignIn />} />
                         <Route path="/signup" element={<SignUp />} />
-                        {/*<Route element={<PrivateRoute />}>  TODO: Remove comment later */}
+                        {/*<Route element={<PrivateRoute />}>*/}
                             <Route path="/" element={<Home />} />
                             <Route path="/profile" element={<Profile />} />
                             <Route path="/jobs" element={<Jobs />} />
                             <Route path="/topics" element={<Topics />} />
                             <Route path="/stories" element={<Stories />} />
-                            <Route path="/roadmap" element={<Roadmap />} />
                             <Route path="/resources" element={<Resources />} />
-                        {/*</Route> */}
+                            <Route path="/roadmaps" element={<Roadmap />} />
+                        {/*</Route>*/}
                     </Routes>
                 </div>
 
-                {/* Right Sidebar */}
+                {/* Right Sidebar (Extreme Right) */}
                 <RightSidebar />
             </div>
-        </Router>
+        </BrowserRouter>
     );
 }
 

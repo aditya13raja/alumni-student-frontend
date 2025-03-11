@@ -53,9 +53,11 @@ export default function Sidebar() {
     }
 
     return (
-        <div className="flex flex-col relative rounded-2xl w-60 h-[98vh] bg-lightbg my-[1vh] py-[5vh] px-5">
+        <div className="left-sidebar flex flex-col relative rounded-2xl w-60 h-[98vh] bg-black my-[1vh] py-[5vh] px-5">
+
             {/* Logo */}
-            <div className="text-5xl absolute top-4">Logo</div>
+            <div className="text-5xl absolute top-4">  <img src="./src/assets/logo.jpeg" alt="Logo" className="h-15 w-auto" />
+            </div>
 
             {/* Sections */}
             <div className="py-20 text-2xl">
