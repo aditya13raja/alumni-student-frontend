@@ -6,6 +6,7 @@ import { FaSearch, FaDatabase, FaSuitcase } from "react-icons/fa";
 import { Link, useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { signOutUserFailure, signOutUserStart, signOutUserSuccess } from "../utils/user/userSlice";
+import Logo from "../assets/logo.svg"
 
 export default function Sidebar() {
     const [menuOpen, setMenuOpen] = useState(false);
@@ -56,7 +57,12 @@ export default function Sidebar() {
         <div className="left-sidebar flex flex-col relative rounded-2xl w-60 h-[98vh] bg-black my-[1vh] py-[5vh] px-5">
 
             {/* Logo */}
-            <div className="text-5xl absolute top-4">  <img src="./src/assets/logo.jpeg" alt="Logo" className="h-15 w-auto" />
+            <div className="absolute top-4 flex gap-2">  
+                <img src={Logo} alt="Logo" className="h-15 w-auto inline" />
+                <div className="flex-col items-center">
+                    <p className="font-bold text-white text-2xl">Alumni</p>
+                    <p className="font-bold text-white text-2xl">Connect</p>
+                </div>
             </div>
 
             {/* Sections */}
@@ -103,7 +109,7 @@ export default function Sidebar() {
                 </div>
 
                 <div className="flex flex-row gap-3 items-center hover:bg-secondary p-3 mb-4 rounded-full">
-                    <Link to="/profile" className="flex items-center space-x-2">
+                    <Link to={`/${username}`} className="flex items-center space-x-2">
                         <FaCircleUser className="text-primary text-3xl" />
                         <p>Profile</p>
                     </Link>

@@ -1,63 +1,62 @@
-import { useState } from "react";
-import { Link } from "react-router-dom";
-import AvatarSelector from "../components/AvatarSelector"; // Import the avatar selector
+import { useState, useEffect } from "react";
+import { useParams } from "react-router-dom";
 
-export default function Profile() {
-  const [user, setUser] = useState({
-    name: "Aman Kumar Verma",
-    email: "aman@example.com",
-    bio: "Aspiring Software Engineer",
-    avatar: "",
-  });
+const ProfilePage = () => {
+    const { username } = useParams();
 
-  const handleChange = (e) => {
-    setUser({ ...user, [e.target.name]: e.target.value });
-  };
+    const [user, setUser] = useState(null);
+    const [loading, setLoading] = useState(false);
+    const [error, setError] = useState("");
 
-  const handleAvatarChange = (avatarUrl) => {
-    setUser({ ...user, avatar: avatarUrl });
-  };
+    useEffect(() => {
+        const fetchUser = async () => {
+            try {
+                setLoading(true);
+                const response = await fetch(`/api/user/${username}`);
+                const data = await response.json();
 
-  const handleDeleteAccount = () => {
-    if (window.confirm("Are you sure you want to delete your account?")) {
-      console.log("Account deleted");
-      setUser(null);
-    }
-  };
+                setUser(data.user)
+                setLoading(false);
+            } catch (error) {
+                setLoading(false);
+                setError("Error fetching user data: ", error);
+            }
+        };
 
-  if (!user) return <p className="text-center text-red-500">Account deleted.</p>;
+        fetchUser();
+    }, [username]);
 
-  return (
-    <div className="max-w-lg mx-auto mt-10 p-6 bg-black shadow-md rounded-lg">
-      <h2 className="text-xl font-semibold mb-4">Profile Page</h2>
-
-      <div className="flex flex-col items-center gap-4 p-4 border rounded-lg">
-        <AvatarSelector avatar={user.avatar} onAvatarChange={handleAvatarChange} />
-
-        <div className="w-full">
-          <label className="block text-gray-700">Name</label>
-          <input name="name" value={user.name} onChange={handleChange} className="w-full p-2 border rounded" />
+    return (
+        <div>
+            <div>
+                {loading && (
+                    <p className="text-center text-[var(--color-white)]">
+                        Loading...
+                    </p>    
+                )}
+                {error && (
+                    <p className="text-4xl text-gray-500 text-center mt-5">
+                        Something went wrong!
+                    </p>
+                )}
+                {user && !loading && !error && (
+                    <div>
+                        <h1 className="text-3xl font-bold text-[var(--color-primary)] mb-4">Profile</h1>
+                        <div className="text-left space-y-3">
+                            <p><span>Name:</span> {user?.first_name} {user?.last_name}</p>
+                            <p><span>Age:</span> {user?.age}</p>
+                            <p><span>Role:</span> {user?.role}</p>
+                            <p><span>Degree:</span> {user?.degree} ({user?.major})</p>
+                            <p><span>Passing Year:</span> {user?.passing_year}</p>
+                            <p><span>Username:</span> {user?.username}</p>
+                            <p><span>Email:</span> {user?.email}</p>
+                        </div>
+                    </div>
+                )}
+            </div>
         </div>
+    );
+};
 
-        <div className="w-full">
-          <label className="block text-gray-700">Email</label>
-          <input name="email" type="email" value={user.email} onChange={handleChange} className="w-full p-2 border rounded" />
-        </div>
+export default ProfilePage;
 
-        <div className="w-full">
-          <label className="block text-gray-700">Bio</label>
-          <input name="bio" value={user.bio} onChange={handleChange} className="w-full p-2 border rounded" />
-        </div>
-
-        <button className="w-full p-2 bg-blue-500 text-white rounded hover:bg-blue-600">Update Profile</button>
-        <button className="w-full p-2 bg-red-500 text-white rounded hover:bg-red-600" onClick={handleDeleteAccount}>
-          Delete Account
-        </button>
-      </div>
-
-      <div className="mt-4 text-center">
-        <Link to="/" className="text-blue-500 hover:underline">Go Home</Link>
-      </div>
-    </div>
-  );
-}
