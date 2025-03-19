@@ -12,8 +12,10 @@ export default defineConfig({
         proxy: {
             // add target url for posting and fetching data from backend
             '/api' : {
-                target: 'http://127.0.0.1:1234',
-                secure: false,
+                //target: 'http://127.0.0.1:1234',
+                target: 'https://alumni-student-backend.onrender.com',
+                changeOrigin: true,
+                secure: true,
             }
         }
     }
