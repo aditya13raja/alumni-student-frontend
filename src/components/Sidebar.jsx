@@ -31,7 +31,7 @@ export default function Sidebar() {
 
     const handleSignOut = async () => {
         try {
-            dispatch(signOutUserStart);
+            dispatch(signOutUserStart());
             const res = await fetch("/api/auth/signout");
             const data = await res.json();
 
@@ -76,6 +76,50 @@ export default function Sidebar() {
                         </Link>
                     </div>
                 ))}
+            </div>
+
+            {/* User Section */}
+            <div className="absolute bottom-4 left-5 flex items-center gap-3 p-3 rounded-lg bg-transparent hover:bg-gray-700 cursor-pointer relative">
+                <FaCircleUser className="text-primary text-3xl" />
+                <div className="flex flex-col">
+                    <p className="text-lg font-semibold">{first_name} {last_name}</p>
+                    <p className="text-sm text-gray-400">@{username}</p>
+                </div>
+
+                {/* Triple dots for menu */}
+                <PiDotsThreeOutlineVerticalFill 
+                    className="text-primary text-xl ml-auto cursor-pointer" 
+                    onClick={() => setMenuOpen(!menuOpen)}
+                />
+
+                {/* Dropdown Menu */}
+                {menuOpen && (
+                    <div ref={menuRef} className="absolute right-0 bottom-14 w-40 bg-white shadow-md rounded-lg p-2 z-10">
+                        {currentUser ? (
+                            <button 
+                                onClick={handleSignOut} 
+                                className="block w-full text-left px-4 py-2 hover:bg-gray-200"
+                            >
+                                Sign Out
+                            </button>
+                        ) : (
+                            <>
+                                <button 
+                                    onClick={() => navigate("/signin")} 
+                                    className="block w-full text-left px-4 py-2 hover:bg-gray-200"
+                                >
+                                    Sign In
+                                </button>
+                                <button 
+                                    onClick={() => navigate("/signup")} 
+                                    className="block w-full text-left px-4 py-2 hover:bg-gray-200"
+                                >
+                                    Sign Up
+                                </button>
+                            </>
+                        )}
+                    </div>
+                )}
             </div>
         </div>
     );

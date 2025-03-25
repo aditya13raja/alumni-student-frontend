@@ -35,17 +35,17 @@ const Home = () => {
             </header>
             {/* Features Section */}
       <section className="container mx-auto py-10 px-4 grid grid-cols-1 md:grid-cols-3 gap-6">
-        <div className="bg-black p-6 rounded shadow-md text-center ">
+        <div className=" p-6 rounded shadow-md text-center ">
           <FaUsers className="text-blue-600 text-4xl mb-3" />
           <h3 className="text-xl font-semibold">Connect</h3>
           <p className="text-gray-600">Find and connect with alumni from your institution.</p>
         </div>
-        <div className="bg-black p-6 rounded shadow-md text-center">
+        <div className="p-6 rounded shadow-md text-center">
           <FaComments className="text-blue-600 text-4xl mb-3" />
           <h3 className="text-xl font-semibold">Engage</h3>
           <p className="text-gray-600">Join discussions and share your experiences.</p>
         </div>
-        <div className="bg-black p-6 rounded shadow-md text-center">
+        <div className="p-6 rounded shadow-md text-center">
           <FaBriefcase className="text-blue-600 text-4xl mb-3" />
           <h3 className="text-xl font-semibold">Opportunities</h3>
           <p className="text-gray-600">Explore job opportunities and mentorship programs.</p>
