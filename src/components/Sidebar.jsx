@@ -8,7 +8,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { signOutUserFailure, signOutUserStart, signOutUserSuccess } from "../utils/user/userSlice";
 import Logo from "../assets/logo.svg";
 
-export default function Sidebar() {
+export default function Sidebar() {  
     const [menuOpen, setMenuOpen] = useState(false);
     const menuRef = useRef(null);
     const dispatch = useDispatch();
