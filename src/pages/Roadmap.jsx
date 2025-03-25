@@ -178,10 +178,11 @@ const roadmaps = () => {
   const roadmapStages = isMTech ? roadmapStagesMTech : roadmapStagesBTech;
 
   return (
-    <div className="flex flex-col items-center bg-black-800 text-white p-8 min-h-screen">
-      <h1 className="text-4xl font-semibold mb-6">Student's Roadmap TO Success</h1>
+    <div className="flex flex-col items-center text-white-500 p-8 min-h-screen">
+  <h1 className="text-4xl font-semibold mb-6">Student's Roadmap TO Success</h1>
 
-      <div className="mb-4">
+
+      <div className="mb-4 shadow-lg">
         <button
           onClick={() => setIsMTech(false)}
           className={`px-4 py-2 rounded-md ${!isMTech ? 'bg-blue-600' : 'bg-gray-600'} hover:bg-blue-700`}
@@ -196,17 +197,17 @@ const roadmaps = () => {
         </button>
       </div>
 
-      <div className="bg-gray-900 p-6 rounded-lg w-full max-w-3xl">
+      <div className="bg-transparent-900 p-6 rounded-lg w-full max-w-3xl shadow-lg">
         <h2 className="text-3xl font-semibold text-blue-500">{roadmapStages[currentStage].title}</h2>
-        <p className="text-gray-400 mt-2">{roadmapStages[currentStage].description}</p>
+        <p className="text-black-400 mt-2">{roadmapStages[currentStage].description}</p>
 
         {roadmapStages[currentStage].goalExample && (
-          <div className="mt-4 text-gray-300 italic">
+          <div className="mt-4 text-black-300 italic">
             <strong>Goal Example:</strong> {roadmapStages[currentStage].goalExample}
           </div>
         )}
 
-        <ul className="mt-4 list-disc pl-5 space-y-2 text-gray-300">
+        <ul className="mt-4 list-disc pl-5 space-y-2 text-black-300">
           {roadmapStages[currentStage].actionItems.map((item, index) => (
             <li key={index}>{item}</li>
           ))}

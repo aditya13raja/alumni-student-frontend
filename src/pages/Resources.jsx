@@ -1,6 +1,6 @@
 import { FaSearch } from "react-icons/fa";
 import { Link } from "react-router-dom";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 
 const resources = [
   { title: "Alumni Directory", description: "Search and connect with alumni based on your field, location, and interests.", link: "/resources/alumni-directory" },
@@ -14,6 +14,13 @@ const resources = [
 
 const ResourcesPage = () => {
   const [searchTerm, setSearchTerm] = useState("");
+  const [theme, setTheme] = useState(localStorage.getItem("theme") || "dark");
+
+  useEffect(() => {
+    document.documentElement.classList.remove("light", "dark");
+    document.documentElement.classList.add(theme);
+    localStorage.setItem("theme", theme);
+  }, [theme]);
 
   const filteredResources = resources.filter(resource =>
     resource.title.toLowerCase().includes(searchTerm.toLowerCase()) ||
@@ -21,13 +28,13 @@ const ResourcesPage = () => {
   );
 
   return (
-    <div className="flex flex-col min-h-screen bg-black-100 py-10 px-5">
+    <div className={`flex flex-col min-h-screen ${theme === "dark" ? "bg-gray-900 text-white" : "bg-white text-black"} py-10 px-5`}>
       {/* Header */}
       <div className="flex items-center justify-between mb-8">
         {/* Left Side - Title */}
         <div className="flex items-center">
           <FaSearch className="text-blue-600 text-4xl mr-3" />
-          <h1 className="text-4xl font-semibold text-white-600">Alumni-Student Connection Portal</h1>
+          <h1 className="text-4xl font-semibold">Alumni-Student Connection Portal</h1>
         </div>
 
         {/* Right Side - Search Bar */}
@@ -37,23 +44,23 @@ const ResourcesPage = () => {
             placeholder="Search resources..."
             value={searchTerm}
             onChange={(e) => setSearchTerm(e.target.value)}
-            className="border border-blue-300 rounded-full px-4 py-2 pl-10 w-64 focus:outline-none focus:ring-2 focus:ring-blue-500 text-white-600"
+            className="border border-blue-300 rounded-full px-4 py-2 pl-10 w-64 focus:outline-none focus:ring-2 focus:ring-blue-500"
           />
-          <FaSearch className="absolute left-3 top-3 text-blue-500" />
+          <FaSearch className="absolute left-3 top-3 text-gray-500" />
         </div>
       </div>
 
       {/* Resources Section */}
-      <div className="bg-black rounded-lg shadow-md p-6">
-        <h2 className="text-2xl font-semibold text-white-600 mb-4">Explore Resources</h2>
+      <div className={`bg-${theme === "dark" ? "gray-800" : "white"} rounded-lg shadow-md p-6`}>
+        <h2 className="text-2xl font-semibold mb-4">Explore Resources</h2>
 
         {/* Resource Tiles Grid */}
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
           {filteredResources.map((resource, index) => (
-            <div key={index} className="bg-black-100 p-4 rounded-md hover:bg-blue-100 cursor-pointer">
+            <div key={index} className={`bg-${theme === "dark" ? "gray-700" : "gray-100"} p-4 rounded-md hover:bg-blue-100 cursor-pointer`}>
               <h3 className="text-xl font-medium text-blue-600">{resource.title}</h3>
               <p className="text-gray-600">{resource.description}</p>
-              <Link to={resource.link} className="text-white-600 mt-2 border-b-2 border-blue-600">
+              <Link to={resource.link} className="text-blue-600 mt-2 border-b-2 border-blue-600">
                 Learn More
               </Link>
             </div>

@@ -1,6 +1,6 @@
 import { FaBriefcase } from "react-icons/fa";
 import { Link } from "react-router-dom";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 
 const jobs = [
   { id: 1, title: "Frontend Developer", company: "TCS Ltd.", location: "Remote", buttonText: "Apply Now" },
@@ -16,6 +16,13 @@ const upcomingJobs = [
 
 const Jobs = () => {
   const [searchTerm, setSearchTerm] = useState("");
+  const [theme, setTheme] = useState(localStorage.getItem("theme") || "dark");
+
+  useEffect(() => {
+    document.documentElement.classList.remove("light", "dark");
+    document.documentElement.classList.add(theme);
+    localStorage.setItem("theme", theme);
+  }, [theme]);
 
   const filterJobs = (jobList) => 
     jobList.filter(job =>
@@ -25,11 +32,11 @@ const Jobs = () => {
     );
 
   return (
-    <div className="flex flex-col min-h-screen bg-black-100 py-10 px-5">
+    <div className={`flex flex-col min-h-screen ${theme === "dark" ? "bg-gray-900 text-white" : "bg-white text-black"} py-10 px-5`}>
       <div className="flex items-center justify-between mb-8">
         <div className="flex items-center">
           <FaBriefcase className="text-blue-600 text-4xl mr-3" />
-          <h1 className="text-4xl font-semibold text-white">Job Portal</h1>
+          <h1 className="text-4xl font-semibold">Job Portal</h1>
         </div>
         <input
           type="text"
@@ -40,19 +47,19 @@ const Jobs = () => {
         />
       </div>
 
-      <JobSection title="Available Jobs" jobs={filterJobs(jobs)} />
-      <JobSection title="Upcoming Jobs" jobs={filterJobs(upcomingJobs)} />
+      <JobSection title="Available Jobs" jobs={filterJobs(jobs)} theme={theme} />
+      <JobSection title="Upcoming Jobs" jobs={filterJobs(upcomingJobs)} theme={theme} />
     </div>
   );
 };
 
-const JobSection = ({ title, jobs }) => (
-  <div className="bg-black rounded-lg shadow-md p-6 mt-6">
+const JobSection = ({ title, jobs, theme }) => (
+  <div className={`bg-${theme === "dark" ? "gray-800" : "white"} rounded-lg shadow-md p-6 mt-6`}>
     <h2 className="text-2xl font-semibold text-blue-600 mb-4">{title}</h2>
     <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
       {jobs.length > 0 ? (
         jobs.map(job => (
-          <div key={job.id} className="bg-black-200 p-4 rounded-md hover:bg-blue-100 cursor-pointer transition duration-300">
+          <div key={job.id} className={`bg-${theme === "dark" ? "gray-700" : "gray-100"} p-4 rounded-md hover:bg-blue-100 cursor-pointer transition duration-300`}>
             <h3 className="text-xl font-medium text-blue-600">{job.title}</h3>
             <p className="text-gray-600">Company: {job.company}</p>
             <p className="text-gray-500">Location: {job.location}</p>

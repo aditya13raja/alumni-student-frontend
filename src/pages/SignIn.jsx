@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { FaUser, FaLock } from "react-icons/fa";
 import { useDispatch, useSelector } from "react-redux";
 import { Link, useNavigate } from "react-router-dom";
@@ -15,10 +15,7 @@ const SignIn = () => {
     });
     const { loading, error } = useSelector((state) => state.user);
     
-    // Create dispatch variable to dispatch reducers
     const dispatch = useDispatch();
-
-    // Create instance of useNavigate hook
     const navigate = useNavigate();
 
     const handleChange = (e) => {
@@ -29,11 +26,9 @@ const SignIn = () => {
         e.preventDefault();
         console.log("Form Data:", formData);
 
-        // Make post request to authenticate
         try {
             dispatch(authStart())
 
-            // Send form Data
             const res = await fetch("/api/auth/signin", {
                 method: "POST",
                 headers: {
@@ -42,20 +37,15 @@ const SignIn = () => {
                 body: JSON.stringify(formData)
             });
 
-            // Save recieved data from backend
             const data = await res.json()
             console.log(data)
             
-            // If data gives error
             if (data.error) {
                 dispatch(authFailure(data.error))
-                return; // Stop here to prevent naviagtion to home 
+                return;
             }
 
-            // Save user info to redux-store
             dispatch(authSuccess(data.user))
-
-            // Navigate to home page after signin
             navigate('/')
         } catch (error) {
             dispatch(authFailure(error.message))
@@ -63,9 +53,9 @@ const SignIn = () => {
     };
 
     return (
-        <div className="min-h-screen bg-black-100 flex items-center justify-center py-10 px-5">
-            <div className="bg-black p-8 rounded-lg shadow-lg w-full max-w-md">
-                <h2 className="text-3xl font-semibold text-center text-black-600 mb-6">Sign In</h2>
+        <div className="min-h-screen flex items-center justify-center py-10 px-142 bg-transparent">
+            <div className="p-8 rounded-lg shadow-lg w-full max-w-md bg-transparent bg-opacity-80">
+                <h2 className="text-3xl font-semibold text-center mb-6 italic ">Sign In</h2>
                 <form onSubmit={handleSubmit} className="space-y-4">
                     <div className="flex items-center border rounded-lg p-2">
                         <FaUser className="text-gray-600 text-xl mr-2" />
