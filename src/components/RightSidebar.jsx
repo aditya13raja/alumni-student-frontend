@@ -1,9 +1,14 @@
 import { FaBell, FaEnvelope, FaUsers, FaChartBar } from "react-icons/fa";
+import { useSelector } from "react-redux";
 
 export default function RightSidebar() {
-  return (
-    <div className="right-sidebar flex flex-col relative rounded-2xl w-60 h-[98vh] bg-black my-[1vh] py-[5vh] px-5 fixed right-0 top-0">
+  const theme = useSelector((state) => state.theme); // Access theme from Redux store
 
+  const darkModeStyles = "bg-black dark:bg-gray-900 text-white";
+  const lightModeStyles = "bg-white dark:bg-gray-200 text-black";
+
+  return (
+    <div className={`right-sidebar flex flex-col relative rounded-2xl w-60 h-[98vh] my-[1vh] py-[5vh] px-5 fixed right-0 top-0 ${theme === "dark" ? darkModeStyles : lightModeStyles}`}>
       {/* Title */}
       <div className="text-2xl font-semibold mb-4">Activity</div>
 

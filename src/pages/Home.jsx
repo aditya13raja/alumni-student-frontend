@@ -1,33 +1,41 @@
-import { FaUsers, FaComments, FaBriefcase } from "react-icons/fa";
+import { useState, useEffect } from "react";
+import { FaUsers, FaComments, FaBriefcase, FaMoon, FaSun } from "react-icons/fa";
+
 
 const Home = () => {
-  return (
-    <div className="min-h-screen bg-black-100">
-      {/* Navigation Bar */}
-      <nav className="bg-black-600 p-4 shadow-md">
-        <div className="container mx-auto flex justify-between items-center">
-          <h1 className="text-white text-2xl font-bold">Alumni Connect</h1>
-          <div>
+    const [theme, setTheme] = useState(localStorage.getItem("theme") || "dark");
 
-            <button className="mr-4 bg-black text-blue-600 px-4 py-2 rounded">Login</button>
-            <button className="bg-black text-blue-600 px-4 py-2 rounded">Register</button>
+    useEffect(() => {
+        document.documentElement.classList.remove("light", "dark");
+        document.documentElement.classList.add(theme);
+        localStorage.setItem("theme", theme);
+    }, [theme]);
 
-          </div>
-        </div>
-      </nav>
+    const toggleTheme = () => {
+        setTheme((prevTheme) => (prevTheme === "dark" ? "light" : "dark"));
+    };
 
-      {/* Hero Section */}
-      <header className="text-center py-20 bg-black-500 text-white">
-        <h2 className="text-4xl font-bold mb-4">Reconnect, Collaborate, and Grow</h2>
-        <p className="text-lg mb-6">
-          Join our platform to connect with alumni, explore opportunities, and build relationships.
-        </p>
-        <button className="bg-black text-blue-600 px-6 py-2 rounded">Get Started</button>
-      </header>
+    return (
+        <div className={`min-h-screen ${theme === "dark" ? "bg-gray-900 text-white" : "bg-white text-black"}`}>
+            {/* Dark Mode Toggle Button */}
+            <button
+                onClick={toggleTheme}
+                className={`absolute top-4 right-4 p-2 rounded-full transition-all ${theme === "dark" ? "bg-white text-black" : "bg-black text-white"}`}
+            >
+                {theme === "dark" ? <FaSun /> : <FaMoon />}
+            </button>
 
-      {/* Features Section */}
+            {/* Hero Section */}
+            <header className={`text-center py-20 ${theme === "dark" ? "bg-gray-800 text-white" : "bg-gray-200 text-black"}`}>
+                <h2 className="text-4xl font-bold mb-4">Reconnect, Collaborate, and Grow</h2>
+                <p className="text-lg mb-6">
+                    Join our platform to connect with alumni, explore opportunities, and build relationships.
+                </p>
+                <button className={`${theme === "dark" ? "bg-white text-black" : "bg-black text-white"} px-6 py-2 rounded`}>Get Started</button>
+            </header>
+            {/* Features Section */}
       <section className="container mx-auto py-10 px-4 grid grid-cols-1 md:grid-cols-3 gap-6">
-        <div className="bg-black p-6 rounded shadow-md text-center">
+        <div className="bg-black p-6 rounded shadow-md text-center ">
           <FaUsers className="text-blue-600 text-4xl mb-3" />
           <h3 className="text-xl font-semibold">Connect</h3>
           <p className="text-gray-600">Find and connect with alumni from your institution.</p>
@@ -43,8 +51,8 @@ const Home = () => {
           <p className="text-gray-600">Explore job opportunities and mentorship programs.</p>
         </div>
       </section>
-    </div>
-  );
+        </div>
+    );
 };
 
 export default Home;

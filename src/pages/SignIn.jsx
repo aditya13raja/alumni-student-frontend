@@ -65,7 +65,7 @@ const SignIn = () => {
     return (
         <div className="min-h-screen bg-black-100 flex items-center justify-center py-10 px-5">
             <div className="bg-black p-8 rounded-lg shadow-lg w-full max-w-md">
-                <h2 className="text-3xl font-semibold text-center text-white-600 mb-6">Sign In</h2>
+                <h2 className="text-3xl font-semibold text-center text-black-600 mb-6">Sign In</h2>
                 <form onSubmit={handleSubmit} className="space-y-4">
                     <div className="flex items-center border rounded-lg p-2">
                         <FaUser className="text-gray-600 text-xl mr-2" />

@@ -1,5 +1,4 @@
 import { createSlice } from "@reduxjs/toolkit";
-
 // Define initial state for the slice
 const initialState = {
     currentUser: null,
@@ -50,6 +49,7 @@ const userSlice = createSlice({
     }
 })
 
+
 // Export reducer functions which are assigned to do specific tasks
 export const {
     authStart,
@@ -59,6 +59,7 @@ export const {
     signOutUserSuccess,
     signOutUserFailure,
 } = userSlice.actions;
+
 
 // Export all reducers
 export default userSlice.reducer;

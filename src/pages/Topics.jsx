@@ -5,7 +5,10 @@ import { useState } from "react";
 const topics = [
   { id: 1, title: "Web Development", description: "Learn front-end, back-end, and full-stack development." },
   { id: 2, title: "Data Science", description: "Dive into machine learning, AI, and data analysis." },
-  { id: 3, title: "UX/UI Design", description: "Learn the principles of designing great user experiences." }
+  { id: 3, title: "UX/UI Design", description: "Learn the principles of designing great user experiences." },
+  { id: 4, title: "Mobile Development", description: "Build apps for iOS and Android using modern frameworks." },
+  { id: 5, title: "Game Development", description: "Create interactive and immersive games for various platforms." },
+  { id: 6, title: "Cybersecurity", description: "Learn to protect systems, networks, and data from cyber threats." }
 ];
 
 const Topics = () => {
@@ -30,7 +33,7 @@ const Topics = () => {
         <div className="relative">
           <input
             type="text"
-            placeholder="Search topics..."
+            placeholder="Search Topics..."
             value={searchTerm}
             onChange={(e) => setSearchTerm(e.target.value)}
             className="border border-blue-300 rounded-full px-4 py-2 pl-10 w-64 focus:outline-none focus:ring-2 focus:ring-blue-500 text-white-600"
@@ -43,14 +46,17 @@ const Topics = () => {
       <div className="bg-black rounded-lg shadow-md p-6">
         <h2 className="text-2xl font-semibold text-white-600 mb-4">Explore Topics</h2>
 
-        <div className="space-y-4">
+        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6">
           {filteredTopics.length > 0 ? (
             filteredTopics.map(topic => (
-              <div key={topic.id} className="bg-black-100 p-4 rounded-md hover:bg-blue-100 cursor-pointer">
-                <h3 className="text-xl font-medium text-blue-600">{topic.title}</h3>
-                <p className="text-gray-600">{topic.description}</p>
-                <Link to={`/topics/${topic.id}`} className="text-blue-600 mt-2 border-b-2 border-blue-600">
-                  Explore Topic
+              <div
+                key={topic.id}
+                className="bg-black-100 p-6 rounded-lg shadow-lg hover:bg-blue-100 cursor-pointer transition-all duration-300"
+              >
+                <h3 className="text-xl font-medium text-white-600 mb-2">{topic.title}</h3>
+                <p className="text-gray-600 mb-4">{topic.description}</p>
+                <Link to={`/topics/${topic.id}`} className="text-white-600 mt-2 border-b-2 border-blue-600">
+                  Read More...
                 </Link>
               </div>
             ))

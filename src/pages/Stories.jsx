@@ -46,7 +46,7 @@ const Stories = () => {
               <FaTwitter className="text-gray-500 cursor-pointer hover:text-blue-400 transition duration-300" />
               <FaLinkedin className="text-gray-500 cursor-pointer hover:text-blue-700 transition duration-300" />
             </div>
-            <h3 className="text-xl font-medium text-gray-800 mt-3">{story.title}</h3>
+            <h3 className="text-xl font-medium text-white-800 mt-3">{story.title}</h3>
             <p className="text-gray-600 text-center">{story.description}</p>
             <Link to={story.link} className="text-blue-600 mt-2 border-b-2 border-blue-600 inline-block">
               Read More

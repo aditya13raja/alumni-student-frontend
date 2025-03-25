@@ -1,4 +1,5 @@
 import { BrowserRouter, Routes, Route, Outlet } from "react-router-dom";
+import { useState, useEffect } from "react";
 import Home from "./pages/Home";
 import Profile from "./pages/Profile";
 import SignIn from "./pages/SignIn";
@@ -6,29 +7,27 @@ import SignUp from "./pages/SignUp";
 import Sidebar from "./components/Sidebar";
 import Jobs from "./pages/Jobs";
 import Topics from "./pages/Topics";
-import RightSidebar from "./components/RightSidebar";
 import Stories from "./pages/Stories";
 import Resources from "./pages/Resources";
 import Roadmap from "./pages/Roadmap";
 import PrivateRoute from "./components/PrivateRoute";
 
-// Layout for authenticated pages (with sidebars)
+// Layout for authenticated pages (with sidebar)
 function MainLayout() {
     return (
-        <div className="flex min-h-screen bg-background text-white">
+        <div className="flex min-h-screen bg-[var(--bg-color)] text-[var(--text-color)]">
             <Sidebar />
             <div className="flex-1 p-6">
                 <Outlet /> {/* Nested routes will render here */}
             </div>
-            <RightSidebar />
         </div>
     );
 }
 
-// Layout for authentication pages (without sidebars)
+// Layout for authentication pages (without sidebar)
 function AuthLayout() {
     return (
-        <div className="flex min-h-screen bg-background text-white justify-center items-center">
+        <div className="flex min-h-screen bg-[var(--bg-color)] text-[var(--text-color)] justify-center items-center">
             <Outlet /> {/* Nested routes will render here */}
         </div>
     );
@@ -62,4 +61,3 @@ function App() {
 }
 
 export default App;
-

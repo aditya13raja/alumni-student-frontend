@@ -4,7 +4,7 @@ import { persistReducer, persistStore } from "redux-persist";
 import userSlice from "./user/userSlice";
 
 // Combine all reducers to rootReducer
-const rootReducer = combineReducers({user: userSlice});
+const rootReducer = combineReducers({user: userSlice,});
 
 // Configure persit store
 const persistConfig = {
