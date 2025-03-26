@@ -50,6 +50,7 @@ const SignUp = () => {
             dispatch(authStart());
             
             // Making post request
+            // axios use
             const res = await fetch("api/auth/signup", {
                 method: "POST",
                 headers: {
@@ -80,8 +81,8 @@ const SignUp = () => {
 
     return (
         <div className="min-h-screen bg-black-100 flex items-center justify-center py-10 px-5">
-            <div className="bg-black p-8 rounded-lg shadow-lg w-full max-w-md">
-                <h2 className="text-3xl font-semibold text-center text-whie-600 mb-6">Sign Up</h2>
+            <div className="bg-transparent p-8 rounded-lg shadow-lg w-full max-w-md">
+                <h2 className="text-3xl font-semibold text-center text-whie-600 mb-6 italic">Sign Up</h2>
                 <form onSubmit={handleSubmit} className="space-y-4">
                     <div className="flex space-x-4">
                         <input

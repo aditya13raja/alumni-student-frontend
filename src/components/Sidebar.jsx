@@ -10,6 +10,7 @@ import Logo from "../assets/logo.svg";
 
 export default function Sidebar() {  
     const [menuOpen, setMenuOpen] = useState(false);
+    const [isExpanded, setIsExpanded] = useState(window.innerWidth >= 768);
     const menuRef = useRef(null);
     const dispatch = useDispatch();
     const navigate = useNavigate();
@@ -29,6 +30,15 @@ export default function Sidebar() {
         return () => document.removeEventListener("mousedown", handleClickOutside);
     }, []);
 
+    useEffect(() => {
+        function handleResize() {
+            setIsExpanded(window.innerWidth >= 768);
+        }
+        window.addEventListener("resize", handleResize);
+        return () => window.removeEventListener("resize", handleResize);
+    }, []);
+
+    
     const handleSignOut = async () => {
         try {
             dispatch(signOutUserStart());
@@ -48,79 +58,76 @@ export default function Sidebar() {
     };
 
     return (
-        <div className="left-sidebar flex flex-col relative rounded-2xl w-60 h-[98vh] my-[1vh] py-[5vh] px-5">
+        <div className={`left-sidebar flex flex-col relative h-[98vh] my-[1vh] py-[5vh] px-3 transition-all duration-300 ${isExpanded ? "w-60" : "w-16"}`}>
             {/* Logo */}
-            <div className="absolute top-4 flex gap-2">
-                <img src={Logo} alt="Logo" className="h-15 w-auto inline" />
-                <div className="flex-col items-center">
-                    <p className="font-bold text-2xl">Alumni</p>
-                    <p className="font-bold text-2xl">Connect</p>
-                </div>
+            <div className="absolute top-4 flex gap-2 items-center cursor-pointer md:pointer-events-none" onClick={() => setIsExpanded(!isExpanded)}>
+                <img src={Logo} alt="Logo" className="h-10 w-auto" />
+                {isExpanded && (
+                    <div className="flex-col">
+                        <p className="font-bold text-2xl">Alumni</p>
+                        <p className="font-bold text-2xl">Connect</p>
+                    </div>
+                )}
             </div>
 
             {/* Sections */}
-            <div className="py-20 text-2xl">
-                {[
+            <div className="py-20 text-2xl flex flex-col gap-4">
+                {[ 
                     { to: "/", icon: <IoMdHome className="text-primary text-3xl" />, label: "Home" },
                     { to: "/topics", icon: <FaSearch className="text-primary" />, label: "Topics" },
                     { to: "/resources", icon: <FaDatabase className="text-primary" />, label: "Resources" },
                     { to: "/stories", icon: <FaTrophy className="text-primary" />, label: "Stories" },
-                    { to: "/roadmaps", icon: <FaRoad className="text-primary text-3xl" />, label: "Roadmap" },
-                    { to: "/jobs", icon: <FaSuitcase className="text-primary text-3xl" />, label: "Jobs" },
-                    { to: `/${username}`, icon: <FaCircleUser className="text-primary text-3xl" />, label: "Profile" },
+                    { to: "/roadmaps", icon: <FaRoad className="text-primary" />, label: "Roadmap" },
+                    { to: "/jobs", icon: <FaSuitcase className="text-primary" />, label: "Jobs" },
+                    { to: `/${username}`, icon: <FaCircleUser className="text-primary" />, label: "Profile" },
                 ].map(({ to, icon, label }) => (
-                    <div key={to} className="flex flex-row gap-3 items-center hover:bg-secondary p-3 mb-4 rounded-full">
-                        <Link to={to} className="flex items-center space-x-2">
-                            {icon}
-                            <p>{label}</p>
-                        </Link>
-                    </div>
+                    <Link key={to} to={to} className="flex items-center gap-3 hover:bg-secondary p-3 rounded-full transition-all duration-300">
+                        {icon}
+                        <span className={`block ${isExpanded ? "inline" : "hidden"}`}>{label}</span>
+                    </Link>
                 ))}
             </div>
 
             {/* User Section */}
-            <div className="absolute bottom-4 left-5 flex items-center gap-3 p-3 rounded-lg bg-transparent hover:bg-gray-700 cursor-pointer relative">
+            <div className="absolute bottom-1 left-0 flex items-center gap-3 p-3 rounded-2xl cursor-pointer relative" onClick={() => setMenuOpen(!menuOpen)}>
                 <FaCircleUser className="text-primary text-3xl" />
-                <div className="flex flex-col">
-                    <p className="text-lg font-semibold">{first_name} {last_name}</p>
-                    <p className="text-sm text-gray-400">@{username}</p>
-                </div>
-
-                {/* Triple dots for menu */}
-                <PiDotsThreeOutlineVerticalFill 
-                    className="text-primary text-xl ml-auto cursor-pointer" 
-                    onClick={() => setMenuOpen(!menuOpen)}
-                />
-
-                {/* Dropdown Menu */}
-                {menuOpen && (
-                    <div ref={menuRef} className="absolute right-0 bottom-14 w-40 bg-white shadow-md rounded-lg p-2 z-10">
-                        {currentUser ? (
-                            <button 
-                                onClick={handleSignOut} 
-                                className="block w-full text-left px-4 py-2 hover:bg-gray-200"
-                            >
-                                Sign Out
-                            </button>
-                        ) : (
-                            <>
-                                <button 
-                                    onClick={() => navigate("/signin")} 
-                                    className="block w-full text-left px-4 py-2 hover:bg-gray-200"
-                                >
-                                    Sign In
-                                </button>
-                                <button 
-                                    onClick={() => navigate("/signup")} 
-                                    className="block w-full text-left px-4 py-2 hover:bg-gray-200"
-                                >
-                                    Sign Up
-                                </button>
-                            </>
-                        )}
+                {isExpanded && (
+                    <div className="flex flex-col">
+                        <p className="text-lg font-semibold">{first_name} {last_name}</p>
+                        <p className="text-sm text-gray-400">@{username}</p>
                     </div>
                 )}
+                <PiDotsThreeOutlineVerticalFill className="text-primary text-xl ml-auto" />
             </div>
+
+            {/* Dropdown Menu */}
+            {menuOpen && (
+                <div ref={menuRef} className="absolute bottom-14 left-0 w-40 bg-white shadow-md rounded-lg p-2 z-10">
+                    {currentUser ? (
+                        <button 
+                            onClick={handleSignOut} 
+                            className="block w-full text-left px-4 py-2 hover:bg-gray-200"
+                        >
+                            Sign Out
+                        </button>
+                    ) : (
+                        <>
+                            <button 
+                                onClick={() => navigate("/signin")} 
+                                className="block w-full text-left px-4 py-2 hover:bg-gray-200"
+                            >
+                                Sign In
+                            </button>
+                            <button 
+                                onClick={() => navigate("/signup")} 
+                                className="block w-full text-left px-4 py-2 hover:bg-gray-200"
+                            >
+                                Sign Up
+                            </button>
+                        </>
+                    )}
+                </div>
+            )}
         </div>
     );
 }

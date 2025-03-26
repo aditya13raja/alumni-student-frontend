@@ -1,9 +1,10 @@
 import { useState, useEffect } from "react";
 import { FaUsers, FaComments, FaBriefcase, FaMoon, FaSun } from "react-icons/fa";
-
+import { useNavigate } from "react-router-dom";
 
 const Home = () => {
     const [theme, setTheme] = useState(localStorage.getItem("theme") || "dark");
+    const navigate = useNavigate();
 
     useEffect(() => {
         document.documentElement.classList.remove("light", "dark");
@@ -16,7 +17,7 @@ const Home = () => {
     };
 
     return (
-        <div className={`min-h-screen ${theme === "dark" ? "bg-gray-900 text-white" : "bg-white text-black"}`}>
+        <div className={`min-h-screen ${theme === "dark" ? "bg-gray-900 text-white" : "bg-transparent text-black"}`}>
             {/* Dark Mode Toggle Button */}
             <button
                 onClick={toggleTheme}
@@ -33,24 +34,27 @@ const Home = () => {
                 </p>
                 <button className={`${theme === "dark" ? "bg-white text-black" : "bg-black text-white"} px-6 py-2 rounded`}>Get Started</button>
             </header>
+
             {/* Features Section */}
-      <section className="container mx-auto py-10 px-4 grid grid-cols-1 md:grid-cols-3 gap-6">
-        <div className=" p-6 rounded shadow-md text-center ">
-          <FaUsers className="text-blue-600 text-4xl mb-3" />
-          <h3 className="text-xl font-semibold">Connect</h3>
-          <p className="text-gray-600">Find and connect with alumni from your institution.</p>
-        </div>
-        <div className="p-6 rounded shadow-md text-center">
-          <FaComments className="text-blue-600 text-4xl mb-3" />
-          <h3 className="text-xl font-semibold">Engage</h3>
-          <p className="text-gray-600">Join discussions and share your experiences.</p>
-        </div>
-        <div className="p-6 rounded shadow-md text-center">
-          <FaBriefcase className="text-blue-600 text-4xl mb-3" />
-          <h3 className="text-xl font-semibold">Opportunities</h3>
-          <p className="text-gray-600">Explore job opportunities and mentorship programs.</p>
-        </div>
-      </section>
+            <section className="container mx-auto py-10 px-4 grid grid-cols-1 md:grid-cols-3 gap-6">
+                <div className="p-6 rounded shadow-md text-center">
+                    <FaUsers className="text-blue-600 text-4xl mb-3" />
+                    <h3 className="text-xl font-semibold">Connect</h3>
+                    <p className="text-gray-600">Find and connect with alumni from your institution.</p>
+                </div>
+                <div className="p-6 rounded shadow-md text-center">
+                    <FaComments className="text-blue-600 text-4xl mb-3" />
+                    <h3 className="text-xl font-semibold">Engage</h3>
+                    <p className="text-gray-600">Join discussions and share your experiences.</p>
+                </div>
+                <div className="p-6 rounded shadow-md text-center cursor-pointer hover:bg-gray-200 transition"
+                    onClick={() => navigate("/jobs")}
+                >
+                    <FaBriefcase className="text-blue-600 text-4xl mb-3" />
+                    <h3 className="text-xl font-semibold">Opportunities</h3>
+                    <p className="text-gray-600">Explore job opportunities and mentorship programs.</p>
+                </div>
+            </section>
         </div>
     );
 };

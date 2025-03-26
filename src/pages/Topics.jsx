@@ -1,6 +1,6 @@
 import { FaSearch } from "react-icons/fa";
 import { Link } from "react-router-dom";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 
 const topics = [
   { id: 1, title: "Web Development", description: "Learn front-end, back-end, and full-stack development." },
@@ -13,6 +13,13 @@ const topics = [
 
 const Topics = () => {
   const [searchTerm, setSearchTerm] = useState("");
+  const [theme, setTheme] = useState(localStorage.getItem("theme") || "dark");
+
+  useEffect(() => {
+    document.documentElement.classList.remove("light", "dark");
+    document.documentElement.classList.add(theme);
+    localStorage.setItem("theme", theme);
+  }, [theme]);
 
   const filteredTopics = topics.filter(topic =>
     topic.title.toLowerCase().includes(searchTerm.toLowerCase()) ||
@@ -20,48 +27,41 @@ const Topics = () => {
   );
 
   return (
-    <div className="flex flex-col min-h-screen bg-black-100 py-10 px-5">
-      {/* Header */}
+    <div className={`flex flex-col min-h-screen ${theme === "dark" ? "bg-gray-900 text-white" : "bg-white text-black"} py-10 px-5`}>
       <div className="flex items-center justify-between mb-8">
-        {/* Left Side - Title */}
         <div className="flex items-center">
           <FaSearch className="text-blue-600 text-4xl mr-3" />
-          <h1 className="text-4xl font-semibold text-white-600">Topics</h1>
+          <h1 className="text-4xl font-semibold">Topics</h1>
         </div>
-
-        {/* Right Side - Search Bar */}
         <div className="relative">
           <input
             type="text"
             placeholder="Search Topics..."
             value={searchTerm}
             onChange={(e) => setSearchTerm(e.target.value)}
-            className="border border-blue-300 rounded-full px-4 py-2 pl-10 w-64 focus:outline-none focus:ring-2 focus:ring-blue-500 text-white-600"
+            className={`border rounded-full px-4 py-2 pl-10 w-64 focus:outline-none focus:ring-2 focus:ring-blue-500 ${theme === "dark" ? "bg-gray-800 text-white border-gray-600" : "bg-white text-black border-gray-300"}`}
           />
           <FaSearch className="absolute left-3 top-3 text-blue-500" />
         </div>
       </div>
-
-      {/* Topics Section */}
-      <div className="bg-black rounded-lg shadow-md p-6">
-        <h2 className="text-2xl font-semibold text-white-600 mb-4">Explore Topics</h2>
-
+      <div className={`rounded-lg shadow-md p-6 ${theme === "dark" ? "bg-gray-800" : "bg-white"}`}>
+        <h2 className="text-2xl font-semibold text-blue-600 mb-4">Explore Topics</h2>
         <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6">
           {filteredTopics.length > 0 ? (
             filteredTopics.map(topic => (
               <div
                 key={topic.id}
-                className="bg-black-100 p-6 rounded-lg shadow-lg hover:bg-blue-100 cursor-pointer transition-all duration-300"
+                className={`p-6 rounded-lg shadow-lg hover:bg-blue-100 cursor-pointer transition-all duration-300 ${theme === "dark" ? "bg-gray-700 text-white" : "bg-gray-100 text-black"}`}
               >
-                <h3 className="text-xl font-medium text-white-600 mb-2">{topic.title}</h3>
+                <h3 className="text-xl font-medium text-blue-600 mb-2">{topic.title}</h3>
                 <p className="text-gray-600 mb-4">{topic.description}</p>
-                <Link to={`/topics/${topic.id}`} className="text-white-600 mt-2 border-b-2 border-blue-600">
+                <Link to={`/topics/${topic.id}`} className="text-blue-600 mt-2 border-b-2 border-blue-600">
                   Read More...
                 </Link>
               </div>
             ))
           ) : (
-            <p className="text-gray-600">No topics found.</p>
+            <p className="text-gray-500">No topics found.</p>
           )}
         </div>
       </div>
