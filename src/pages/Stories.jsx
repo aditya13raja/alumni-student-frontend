@@ -19,7 +19,7 @@ const Stories = () => {
   );
 
   return (
-    <div className={`flex flex-col min-h-screen ${theme === "dark" ? "bg-gray-900 text-white" : "bg-white text-black"} py-10 px-5`}>
+    <div className={`flex flex-col min-h-screen ${theme === "dark" ? "bg-gray-900 text-white" : "bg-transparent text-black"} py-10 px-5`}>
       {/* Header with Search Bar */}
       <div className="flex justify-between items-center mb-8">
         <div className="flex items-center">
@@ -31,7 +31,7 @@ const Stories = () => {
           placeholder="Search stories..."
           value={searchTerm}
           onChange={(e) => setSearchTerm(e.target.value)}
-          className={`border rounded-lg px-4 py-2 w-64 focus:outline-none focus:ring-2 focus:ring-blue-500 ${theme === "dark" ? "bg-gray-800 text-white border-gray-600" : "bg-white text-black border-gray-300"}`}
+          className={`border rounded-lg px-4 py-2 w-64 focus:outline-none focus:ring-2 focus:ring-blue-500 ${theme === "dark" ? "bg-gray-800 text-white border-gray-600" : "bg-transparent text-black border-gray-300 shadow-lg"}`}
         />
       </div>
 
@@ -47,13 +47,13 @@ const Stories = () => {
               alt={story.author}
               className="w-24 h-24 rounded-full mb-4"
             />
-            <h2 className="text-2xl font-semibold text-blue-600">{story.author}</h2>
+            <h2 className="text-2xl font-semibold text-blue-600 ">{story.author}</h2>
             <div className="flex space-x-3 mt-2">
               <FaFacebook className="text-gray-500 cursor-pointer hover:text-blue-600 transition duration-300" />
               <FaTwitter className="text-gray-500 cursor-pointer hover:text-blue-400 transition duration-300" />
               <FaLinkedin className="text-gray-500 cursor-pointer hover:text-blue-700 transition duration-300" />
             </div>
-            <h3 className="text-xl font-medium mt-3">{story.title}</h3>
+            <h3 className="text-xl font-medium mt-3 ">{story.title}</h3>
             <p className="text-gray-600 text-center">{story.description}</p>
             <Link to={story.link} className="text-blue-600 mt-2 border-b-2 border-blue-600 inline-block">
               Read More
@@ -92,21 +92,28 @@ const storiesData = [
     title: "Journey into Web Development",
     description: "A developer's experience transitioning into full-stack development.",
     image: "./src/assets/image.png",
-    link: "/stories/1",
+    link: "/stories/4",
   },
   {
     author: "Nishtha",
     title: "Data Science Adventures",
     description: "Exploring the world of AI, ML, and Big Data.",
     image: "./src/assets/image.png",
-    link: "/stories/2",
+    link: "/stories/5",
   },
   {
     author: "Ashutosh",
     title: "From Designer to UX/UI Expert",
     description: "Insights on creating seamless user experiences.",
     image: "./src/assets/image.png",
-    link: "/stories/3",
+    link: "/stories/6",
+  },
+  {
+    author: "Ashutosh",
+    title: "From Designer to UX/UI Expert",
+    description: "Insights on creating seamless user experiences.",
+    image: "./src/assets/image.png",
+    link: "/stories/6",
   },
 ];
 

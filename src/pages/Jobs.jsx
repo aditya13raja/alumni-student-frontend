@@ -32,7 +32,7 @@ const Jobs = () => {
     );
 
   return (
-    <div className={`flex flex-col min-h-screen ${theme === "dark" ? "bg-gray-900 text-white" : "bg-white text-black"} py-10 px-5`}>
+    <div className={`flex flex-col min-h-screen ${theme === "dark" ? "bg-gray-900 text-white" : "bg-transparent text-black"} py-10 px-5`}>
       <div className="flex items-center justify-between mb-8">
         <div className="flex items-center">
           <FaBriefcase className="text-blue-600 text-4xl mr-3" />

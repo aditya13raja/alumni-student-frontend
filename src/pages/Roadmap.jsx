@@ -185,13 +185,13 @@ const roadmaps = () => {
       <div className="mb-4 shadow-lg">
         <button
           onClick={() => setIsMTech(false)}
-          className={`px-4 py-2 rounded-md ${!isMTech ? 'bg-blue-600' : 'bg-gray-600'} hover:bg-blue-700`}
+          className={`px-4 py-2 rounded-md ${!isMTech ? 'bg-blue-600' : 'bg-gray-200'} hover:bg-blue-700`}
         >
           BTech Roadmap
         </button>
         <button
           onClick={() => setIsMTech(true)}
-          className={`px-4 py-2 rounded-md ${isMTech ? 'bg-blue-600' : 'bg-gray-600'} hover:bg-blue-700`}
+          className={`px-4 py-2 rounded-md ${isMTech ? 'bg-blue-600' : 'bg-gray-200'} hover:bg-blue-700`}
         >
           MTech Roadmap
         </button>

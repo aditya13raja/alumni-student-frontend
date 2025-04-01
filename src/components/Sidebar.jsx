@@ -1,6 +1,5 @@
 import { useState, useRef, useEffect } from "react";
 import { FaCircleUser, FaRoad, FaTrophy } from "react-icons/fa6";
-import { PiDotsThreeOutlineVerticalFill } from "react-icons/pi";
 import { IoMdHome } from "react-icons/io";
 import { FaSearch, FaDatabase, FaSuitcase } from "react-icons/fa";
 import { Link, useNavigate } from "react-router-dom";
@@ -38,7 +37,6 @@ export default function Sidebar() {
         return () => window.removeEventListener("resize", handleResize);
     }, []);
 
-    
     const handleSignOut = async () => {
         try {
             dispatch(signOutUserStart());
@@ -58,7 +56,7 @@ export default function Sidebar() {
     };
 
     return (
-        <div className={`left-sidebar flex flex-col relative h-[98vh] my-[1vh] py-[5vh] px-3 transition-all duration-300 ${isExpanded ? "w-60" : "w-16"}`}>
+        <div className={`left-sidebar flex flex-col relative h-full my-[1vh] py-[5vh] px-3 transition-all duration-300 ${isExpanded ? "w-60" : "w-16"}`}>
             {/* Logo */}
             <div className="absolute top-4 flex gap-2 items-center cursor-pointer md:pointer-events-none" onClick={() => setIsExpanded(!isExpanded)}>
                 <img src={Logo} alt="Logo" className="h-10 w-auto" />
@@ -79,9 +77,10 @@ export default function Sidebar() {
                     { to: "/stories", icon: <FaTrophy className="text-primary" />, label: "Stories" },
                     { to: "/roadmaps", icon: <FaRoad className="text-primary" />, label: "Roadmap" },
                     { to: "/jobs", icon: <FaSuitcase className="text-primary" />, label: "Jobs" },
+                    { to: "/messages", icon: <FaCircleUser className="text-primary" />, label: "Messages" },
                     { to: `/${username}`, icon: <FaCircleUser className="text-primary" />, label: "Profile" },
                 ].map(({ to, icon, label }) => (
-                    <Link key={to} to={to} className="flex items-center gap-3 hover:bg-secondary p-3 rounded-full transition-all duration-300">
+                    <Link key={to} to={to} className="flex items-center gap-3 hover:bg-gray-200 p-3 rounded-full transition-all duration-300">
                         {icon}
                         <span className={`block ${isExpanded ? "inline" : "hidden"}`}>{label}</span>
                     </Link>
@@ -89,7 +88,7 @@ export default function Sidebar() {
             </div>
 
             {/* User Section */}
-            <div className="absolute bottom-1 left-0 flex items-center gap-3 p-3 rounded-2xl cursor-pointer relative" onClick={() => setMenuOpen(!menuOpen)}>
+            <div className="absolute bottom-5 left-0 flex items-center gap-3 p-3 rounded-2xl cursor-pointer relative" onClick={() => setMenuOpen(!menuOpen)}>
                 <FaCircleUser className="text-primary text-3xl" />
                 {isExpanded && (
                     <div className="flex flex-col">
@@ -97,12 +96,11 @@ export default function Sidebar() {
                         <p className="text-sm text-gray-400">@{username}</p>
                     </div>
                 )}
-                <PiDotsThreeOutlineVerticalFill className="text-primary text-xl ml-auto" />
             </div>
 
             {/* Dropdown Menu */}
             {menuOpen && (
-                <div ref={menuRef} className="absolute bottom-14 left-0 w-40 bg-white shadow-md rounded-lg p-2 z-10">
+                <div ref={menuRef} className="absolute bottom-30 right-0 w-30 bg-gray shadow-md rounded-lg p-2 z-10">
                     {currentUser ? (
                         <button 
                             onClick={handleSignOut} 
@@ -131,3 +129,4 @@ export default function Sidebar() {
         </div>
     );
 }
+    

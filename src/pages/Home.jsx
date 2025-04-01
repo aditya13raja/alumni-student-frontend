@@ -36,7 +36,7 @@ const Home = () => {
             </header>
 
             {/* Features Section */}
-            <section className="container mx-auto py-10 px-4 grid grid-cols-1 md:grid-cols-3 gap-6">
+            <section className={`${theme === "dark" ? "bg-transparent text-black" : "bg-transparent text-white"}"container mx-auto py-10 px-4 grid grid-cols-1 md:grid-cols-3 gap-6`}>
                 <div className="p-6 rounded shadow-md text-center">
                     <FaUsers className="text-blue-600 text-4xl mb-3" />
                     <h3 className="text-xl font-semibold">Connect</h3>
@@ -47,7 +47,8 @@ const Home = () => {
                     <h3 className="text-xl font-semibold">Engage</h3>
                     <p className="text-gray-600">Join discussions and share your experiences.</p>
                 </div>
-                <div className="p-6 rounded shadow-md text-center cursor-pointer hover:bg-gray-200 transition"
+                <div 
+                    className="p-6 rounded shadow-md text-center cursor-pointer hover:bg-gray-200 transition"
                     onClick={() => navigate("/jobs")}
                 >
                     <FaBriefcase className="text-blue-600 text-4xl mb-3" />

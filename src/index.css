@@ -45,3 +45,8 @@ body {
     --text-color: #ffffff;
     --primary-color: #1e90ff;
 }
+
+html, body {
+    height: 100%;
+    overflow: auto;
+}
