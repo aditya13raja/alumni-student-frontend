@@ -28,7 +28,7 @@ const ResourcesPage = () => {
   );
 
   return (
-    <div className={`flex flex-col min-h-screen ${theme === "dark" ? "bg-gray-900 text-white" : "bg-white text-black"} py-10 px-5`}>
+    <div className={`flex flex-col min-h-screen ${theme === "dark" ? "bg-gray-900 text-white" : "bg-transparent text-black"} py-10 px-5`}>
       {/* Header */}
       <div className="flex items-center justify-between mb-8">
         {/* Left Side - Title */}
@@ -44,14 +44,14 @@ const ResourcesPage = () => {
             placeholder="Search resources..."
             value={searchTerm}
             onChange={(e) => setSearchTerm(e.target.value)}
-            className="border border-blue-300 rounded-full px-4 py-2 pl-10 w-64 focus:outline-none focus:ring-2 focus:ring-blue-500"
+            className="border border-blue-300 rounded-full px-4 py-2 pl-10 w-64 shadow-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
           />
           <FaSearch className="absolute left-3 top-3 text-gray-500" />
         </div>
       </div>
 
       {/* Resources Section */}
-      <div className={`bg-${theme === "dark" ? "gray-800" : "white"} rounded-lg shadow-md p-6`}>
+      <div className={`bg-${theme === "dark" ? "gray-800" : "transparent"} rounded-lg shadow-md p-6`}>
         <h2 className="text-2xl font-semibold mb-4">Explore Resources</h2>
 
         {/* Resource Tiles Grid */}

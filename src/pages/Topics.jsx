@@ -27,7 +27,7 @@ const Topics = () => {
   );
 
   return (
-    <div className={`flex flex-col min-h-screen ${theme === "dark" ? "bg-gray-900 text-white" : "bg-white text-black"} py-10 px-5`}>
+    <div className={`flex flex-col min-h-screen ${theme === "dark" ? "bg-gray-900 text-white" : "bg-transparent text-black"} py-10 px-5`}>
       <div className="flex items-center justify-between mb-8">
         <div className="flex items-center">
           <FaSearch className="text-blue-600 text-4xl mr-3" />
@@ -39,12 +39,12 @@ const Topics = () => {
             placeholder="Search Topics..."
             value={searchTerm}
             onChange={(e) => setSearchTerm(e.target.value)}
-            className={`border rounded-full px-4 py-2 pl-10 w-64 focus:outline-none focus:ring-2 focus:ring-blue-500 ${theme === "dark" ? "bg-gray-800 text-white border-gray-600" : "bg-white text-black border-gray-300"}`}
+            className={`border rounded-full px-4 py-2 pl-10 w-64 focus:outline-none focus:ring-2 focus:ring-blue-500 ${theme === "dark" ? "bg-gray-800 text-white border-gray-600" : "bg-transparent text-black border-gray-300 shadow-lg"}`}
           />
           <FaSearch className="absolute left-3 top-3 text-blue-500" />
         </div>
       </div>
-      <div className={`rounded-lg shadow-md p-6 ${theme === "dark" ? "bg-gray-800" : "bg-white"}`}>
+      <div className={`rounded-lg shadow-md p-6 ${theme === "dark" ? "bg-gray-800" : "bg-transparent"}`}>
         <h2 className="text-2xl font-semibold text-blue-600 mb-4">Explore Topics</h2>
         <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6">
           {filteredTopics.length > 0 ? (

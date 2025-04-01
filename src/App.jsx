@@ -10,6 +10,7 @@ import Topics from "./pages/Topics";
 import Stories from "./pages/Stories";
 import Resources from "./pages/Resources";
 import Roadmap from "./pages/Roadmap";
+import Messages from "./pages/Messages";
 import PrivateRoute from "./components/PrivateRoute";
 
 // Layout for authenticated pages (with sidebar)
@@ -53,6 +54,7 @@ function App() {
                         <Route path="/stories" element={<Stories />} />
                         <Route path="/resources" element={<Resources />} />
                         <Route path="/roadmaps" element={<Roadmap />} />
+                        <Route path="/messages" element={<Messages />}/>
                     </Route>
                 </Route>
             </Routes>
