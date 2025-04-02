@@ -18,7 +18,7 @@ function MainLayout() {
     return (
         <div className="flex min-h-screen bg-[var(--bg-color)] text-[var(--text-color)]">
             <Sidebar />
-            <div className="flex-1 p-6">
+            <div className="flex-1 p-1">
                 <Outlet /> {/* Nested routes will render here */}
             </div>
         </div>
