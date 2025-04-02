@@ -1,7 +1,7 @@
 import { useState, useRef, useEffect } from "react";
-import { FaCircleUser, FaRoad, FaTrophy } from "react-icons/fa6";
+import { FaCircleUser, FaRoad, FaTextSlash, FaTrophy } from "react-icons/fa6";
 import { IoMdHome } from "react-icons/io";
-import { FaSearch, FaDatabase, FaSuitcase } from "react-icons/fa";
+import { FaSearch, FaDatabase, FaSuitcase, FaTextHeight, FaRocketchat, FaEnvelopeOpenText } from "react-icons/fa";
 import { Link, useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { signOutUserFailure, signOutUserStart, signOutUserSuccess } from "../utils/user/userSlice";
@@ -56,7 +56,7 @@ export default function Sidebar() {
     };
 
     return (
-        <div className={`left-sidebar flex flex-col relative h-full my-[1vh] py-[5vh] px-3 transition-all duration-300 ${isExpanded ? "w-60" : "w-16"}`}>
+        <div className={`left-sidebar flex flex-col relative h-full w-min my-[-1vh] py-[5vh] px-3 transition-all duration-300 ${isExpanded ? "w-60" : "w-16"}`}>
             {/* Logo */}
             <div className="absolute top-4 flex gap-2 items-center cursor-pointer md:pointer-events-none" onClick={() => setIsExpanded(!isExpanded)}>
                 <img src={Logo} alt="Logo" className="h-10 w-auto" />
@@ -77,7 +77,7 @@ export default function Sidebar() {
                     { to: "/stories", icon: <FaTrophy className="text-primary" />, label: "Stories" },
                     { to: "/roadmaps", icon: <FaRoad className="text-primary" />, label: "Roadmap" },
                     { to: "/jobs", icon: <FaSuitcase className="text-primary" />, label: "Jobs" },
-                    { to: "/messages", icon: <FaCircleUser className="text-primary" />, label: "Messages" },
+                    { to: "/messages", icon: <FaEnvelopeOpenText className="text-primary" />, label: "Messages" },
                     { to: `/${username}`, icon: <FaCircleUser className="text-primary" />, label: "Profile" },
                 ].map(({ to, icon, label }) => (
                     <Link key={to} to={to} className="flex items-center gap-3 hover:bg-gray-200 p-3 rounded-full transition-all duration-300">

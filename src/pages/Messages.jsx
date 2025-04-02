@@ -20,11 +20,13 @@ const Messages = () => {
     const fetchChats = async () => {
       const response = await fetch("/api/chats");
       const data = await response.json();
+      console.log("Fetched Chats:", data); // Debugging
       setChats(data);
       if (data.length > 0) setActiveChat(data[0]);
     };
     fetchChats();
   }, []);
+  
 
   useEffect(() => {
     if (!activeChat) return;
@@ -69,7 +71,8 @@ const Messages = () => {
   };
 
   const filteredChats = chats.filter((chat) =>
-    chat.topic.toLowerCase().includes(searchTerm.toLowerCase()) // Filter chats based on search input
+    chat.topic.toLowerCase().includes(searchTerm.toLowerCase()) ||
+    (chat.username && chat.username.toLowerCase().includes(searchTerm.toLowerCase())) // Handle missing username
   );
 
   return (
@@ -80,13 +83,16 @@ const Messages = () => {
 
         {/* Search Bar */}
         <div className="mb-4">
-          <input
-            type="text"
-            placeholder="Search Chats..."
-            className="w-full p-3 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
-            value={searchTerm}
-            onChange={(e) => setSearchTerm(e.target.value)} // Update search term
-          />
+        <input
+          type="text"
+          placeholder="Search Chats..."
+          className="w-full p-3 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
+          value={searchTerm}
+          onChange={(e) => {
+            console.log("Search Input:", e.target.value); // Debugging
+            setSearchTerm(e.target.value);
+        }} 
+        />
         </div>
 
         {/* Chats List */}
