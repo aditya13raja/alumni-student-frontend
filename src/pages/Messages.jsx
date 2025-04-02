@@ -78,7 +78,7 @@ const Messages = () => {
   return (
     <div className={`flex h-screen ${theme === "dark" ? "bg-gray-900 text-white" : "bg-gray-100 text-black"}`}>
       {/* Sidebar */}
-      <div className={`w-1/4 p-6 border-r shadow-lg rounded-lg m-6 ${theme === "dark" ? "bg-gray-800 text-white" : "bg-white text-black"}`}>
+      <div className={`w-1/4 p-6  shadow-lg rounded-lg m-1 ${theme === "dark" ? "bg-gray-800 text-white" : "bg-transparent text-black"}`}>
         <h2 className="text-2xl font-bold mb-6">Chats</h2>
 
         {/* Search Bar */}
@@ -117,7 +117,7 @@ const Messages = () => {
       </div>
 
       {/* Chat Window */}
-      <div className={`w-3/4 flex flex-col rounded-lg shadow-lg m-6 overflow-hidden ${theme === "dark" ? "bg-gray-800 text-white" : "bg-white text-black"}`}>
+      <div className={`w-3/4 flex flex-col rounded-lg shadow-lg overflow-hidden ${theme === "dark" ? "bg-gray-800 text-white" : "bg-white text-black"}`}>
         <div className={`p-6 font-semibold text-xl flex justify-between items-center ${theme === "dark" ? "bg-blue-700 text-white" : "bg-blue-500 text-white"}`}>
           {activeChat ? activeChat.topic : "Select a chat"}
           <div className="flex space-x-4">
@@ -148,16 +148,16 @@ const Messages = () => {
         </div>
 
         {/* Input Field */}
-        <div className={`p-6 border-t flex items-center space-x-4 ${theme === "dark" ? "bg-gray-700" : "bg-gray-200"}`}>
+        <div className={`p-6  flex items-center space-x-4 ${theme === "dark" ? "bg-gray-700" : "bg-gray-200"}`}>
           <input
             type="text"
-            className="flex-1 p-4 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
+            className="flex-1 p-1 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
             placeholder="Type a message..."
             value={input}
             onChange={(e) => setInput(e.target.value)}
             onKeyPress={(e) => e.key === "Enter" && sendMessage()}
           />
-          <button onClick={sendMessage} className="p-4 bg-blue-500 text-white rounded-lg hover:bg-blue-600 transition duration-300">
+          <button onClick={sendMessage} className="p-1 bg-blue-500 text-white rounded-lg hover:bg-blue-600 transition duration-300">
             <Send size={24} />
           </button>
         </div>

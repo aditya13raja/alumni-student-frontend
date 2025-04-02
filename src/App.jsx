@@ -16,7 +16,7 @@ import PrivateRoute from "./components/PrivateRoute";
 // Layout for authenticated pages (with sidebar)
 function MainLayout() {
     return (
-        <div className="flex min-h-screen bg-[var(--bg-color)] text-[var(--text-color)]">
+        <div className="flex min-h-screen  bg-[var(--bg-color)] text-[var(--text-color)]">
             <Sidebar />
             <div className="flex-1 p-1">
                 <Outlet /> {/* Nested routes will render here */}

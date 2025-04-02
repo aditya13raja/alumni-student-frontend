@@ -1,7 +1,7 @@
 import { useState, useRef, useEffect } from "react";
-import { FaCircleUser, FaRoad, FaTextSlash, FaTrophy } from "react-icons/fa6";
+import { FaCircleUser, FaHotTubPerson, FaPerson, FaPersonBooth, FaPersonCane, FaPersonCirclePlus, FaPersonDress, FaRoad, FaSquarePersonConfined, FaTextSlash, FaTrophy, FaUserDoctor } from "react-icons/fa6";
 import { IoMdHome } from "react-icons/io";
-import { FaSearch, FaDatabase, FaSuitcase, FaTextHeight, FaRocketchat, FaEnvelopeOpenText } from "react-icons/fa";
+import { FaSearch, FaDatabase, FaSuitcase, FaTextHeight, FaRocketchat, FaEnvelopeOpenText, FaUserFriends } from "react-icons/fa";
 import { Link, useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { signOutUserFailure, signOutUserStart, signOutUserSuccess } from "../utils/user/userSlice";
@@ -69,7 +69,7 @@ export default function Sidebar() {
             </div>
 
             {/* Sections */}
-            <div className="py-20 text-2xl flex flex-col gap-4">
+            <div className="py-18 text-2xl flex flex-col gap-3">
                 {[ 
                     { to: "/", icon: <IoMdHome className="text-primary text-3xl" />, label: "Home" },
                     { to: "/topics", icon: <FaSearch className="text-primary" />, label: "Topics" },
@@ -78,7 +78,7 @@ export default function Sidebar() {
                     { to: "/roadmaps", icon: <FaRoad className="text-primary" />, label: "Roadmap" },
                     { to: "/jobs", icon: <FaSuitcase className="text-primary" />, label: "Jobs" },
                     { to: "/messages", icon: <FaEnvelopeOpenText className="text-primary" />, label: "Messages" },
-                    { to: `/${username}`, icon: <FaCircleUser className="text-primary" />, label: "Profile" },
+                    { to: `/${username}`, icon: <FaUserFriends className="text-primary" />, label: "Profile" },
                 ].map(({ to, icon, label }) => (
                     <Link key={to} to={to} className="flex items-center gap-3 hover:bg-gray-200 p-3 rounded-full transition-all duration-300">
                         {icon}
@@ -88,7 +88,7 @@ export default function Sidebar() {
             </div>
 
             {/* User Section */}
-            <div className="absolute bottom-5 left-0 flex items-center gap-3 p-3 rounded-2xl cursor-pointer relative" onClick={() => setMenuOpen(!menuOpen)}>
+            <div className=" left-0 flex items-center gap-3 p-3 rounded-2xl cursor-pointer relative" onClick={() => setMenuOpen(!menuOpen)}>
                 <FaCircleUser className="text-primary text-3xl" />
                 {isExpanded && (
                     <div className="flex flex-col">
