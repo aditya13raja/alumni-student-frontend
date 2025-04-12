@@ -8,7 +8,8 @@ const Messages = () => {
   const [messages, setMessages] = useState({});
   const [input, setInput] = useState("");
   const [theme, setTheme] = useState(localStorage.getItem("theme") || "dark");
-  const [searchTerm, setSearchTerm] = useState(""); // State to track search input
+  const [searchTerm, setSearchTerm] = useState("");
+  const [showDetails, setShowDetails] = useState(false);
 
   useEffect(() => {
     document.documentElement.classList.remove("light", "dark");
@@ -20,13 +21,11 @@ const Messages = () => {
     const fetchChats = async () => {
       const response = await fetch("/api/chats");
       const data = await response.json();
-      console.log("Fetched Chats:", data); // Debugging
       setChats(data);
       if (data.length > 0) setActiveChat(data[0]);
     };
     fetchChats();
   }, []);
-  
 
   useEffect(() => {
     if (!activeChat) return;
@@ -61,8 +60,6 @@ const Messages = () => {
         [activeChat.id]: [...(messages[activeChat.id] || []), newMessage],
       });
       setInput("");
-    } else {
-      console.error("Failed to send message");
     }
   };
 
@@ -72,30 +69,21 @@ const Messages = () => {
 
   const filteredChats = chats.filter((chat) =>
     chat.topic.toLowerCase().includes(searchTerm.toLowerCase()) ||
-    (chat.username && chat.username.toLowerCase().includes(searchTerm.toLowerCase())) // Handle missing username
+    (chat.username && chat.username.toLowerCase().includes(searchTerm.toLowerCase()))
   );
 
   return (
     <div className={`flex h-screen ${theme === "dark" ? "bg-gray-900 text-white" : "bg-gray-100 text-black"}`}>
       {/* Sidebar */}
-      <div className={`w-1/4 p-6  shadow-lg rounded-lg m-1 ${theme === "dark" ? "bg-gray-800 text-white" : "bg-transparent text-black"}`}>
+      <div className={`w-1/4 p-6 shadow-lg rounded-lg m-1 ${theme === "dark" ? "bg-gray-800 text-white" : "bg-transparent text-black"}`}>
         <h2 className="text-2xl font-bold mb-6">Chats</h2>
-
-        {/* Search Bar */}
-        <div className="mb-4">
         <input
           type="text"
           placeholder="Search Chats..."
-          className="w-full p-3 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
+          className="w-full p-3 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 mb-4"
           value={searchTerm}
-          onChange={(e) => {
-            console.log("Search Input:", e.target.value); // Debugging
-            setSearchTerm(e.target.value);
-        }} 
+          onChange={(e) => setSearchTerm(e.target.value)}
         />
-        </div>
-
-        {/* Chats List */}
         {filteredChats.length === 0 ? (
           <p className="text-gray-500">No chats found</p>
         ) : (
@@ -108,8 +96,8 @@ const Messages = () => {
               onClick={() => setActiveChat(chat)}
             >
               <div className="flex items-center">
-                <div className="w-12 h-12 bg-gray-300 rounded-full mr-4"></div>
-                <span className="font-semibold">{chat.topic}</span>
+                <div className="w-12 h-12 bg-gray-300 rounded-full mr-4" onClick={() => setShowDetails(!showDetails)}></div>
+                <span className="font-semibold" onClick={() => setShowDetails(!showDetails)}>{chat.username}</span>
               </div>
             </div>
           ))
@@ -117,9 +105,12 @@ const Messages = () => {
       </div>
 
       {/* Chat Window */}
-      <div className={`w-3/4 flex flex-col rounded-lg shadow-lg overflow-hidden ${theme === "dark" ? "bg-gray-800 text-white" : "bg-white text-black"}`}>
-        <div className={`p-6 font-semibold text-xl flex justify-between items-center ${theme === "dark" ? "bg-blue-700 text-white" : "bg-blue-500 text-white"}`}>
-          {activeChat ? activeChat.topic : "Select a chat"}
+      <div className={`flex flex-col rounded-lg shadow-lg overflow-hidden ${showDetails ? "w-2/4" : "w-3/4"} ${theme === "dark" ? "bg-gray-800 text-white" : "bg-white text-black"}`}>
+        <div className={`p-6 font-semibold text-xl flex justify-between items-center ${theme === "dark" ? "bg-blue-200 text-white" : "bg-blue-500 text-white"}`}>
+          <div className="flex items-center space-x-4 cursor-pointer" onClick={() => setShowDetails(!showDetails)}>
+            <div className="w-12 h-12 bg-gray-300 rounded-full"></div>
+            <span>{activeChat ? activeChat.username : "Username"}</span>
+          </div>
           <div className="flex space-x-4">
             <button onClick={() => initiateCall("Audio")} className="hover:text-gray-300">
               <PhoneCall size={24} />
@@ -129,39 +120,30 @@ const Messages = () => {
             </button>
           </div>
         </div>
-
-        {/* Messages */}
         <div className={`flex-1 p-6 overflow-y-auto ${theme === "dark" ? "bg-gray-900" : "bg-gray-100"}`}>
           {messages[activeChat?.id]?.map((msg, index) => (
-            <motion.div
-              key={index}
-              initial={{ opacity: 0, y: 10 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.3 }}
-              className={`mb-4 flex ${msg.username === "You" ? "justify-end" : "justify-start"}`}
-            >
+            <motion.div key={index} initial={{ opacity: 0, y: 10 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.3 }} className={`mb-4 flex ${msg.username === "You" ? "justify-end" : "justify-start"}`}>
               <div className={`max-w-md p-4 rounded-lg shadow-lg ${msg.username === "You" ? "bg-green-500 text-white" : "bg-blue-500 text-white"}`}>
                 <p className="text-sm">{msg.msg_content}</p>
               </div>
             </motion.div>
           ))}
         </div>
-
-        {/* Input Field */}
-        <div className={`p-6  flex items-center space-x-4 ${theme === "dark" ? "bg-gray-700" : "bg-gray-200"}`}>
+        <div className="p-2 flex items-center bg-gray-200 ">
           <input
             type="text"
-            className="flex-1 p-1 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
+            className="flex-1 p-2 border rounded-lg focus:outline-none"
             placeholder="Type a message..."
             value={input}
             onChange={(e) => setInput(e.target.value)}
-            onKeyPress={(e) => e.key === "Enter" && sendMessage()}
           />
-          <button onClick={sendMessage} className="p-1 bg-blue-500 text-white rounded-lg hover:bg-blue-600 transition duration-300">
+          <button onClick={sendMessage} className="ml-2 bg-blue-500 text-white p-2 rounded-lg">
             <Send size={24} />
           </button>
         </div>
       </div>
+
+      {showDetails && <div className="w-1/4 p-6 bg-gray-700 text-white">User Info.</div>}
     </div>
   );
 };
