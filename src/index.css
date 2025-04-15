@@ -10,6 +10,7 @@
 body {
     background-color: var(--color-background); /* Apply black background */
     color: var(--color-white); /* Ensure text is readable */
+    box-sizing: box-border;
 }
 
 .search-bar input {
