@@ -77,7 +77,6 @@ export default function Sidebar() {
                     { to: "/stories", icon: <FaTrophy className="text-primary" />, label: "Stories" },
                     { to: "/roadmaps", icon: <FaRoad className="text-primary" />, label: "Roadmap" },
                     { to: "/jobs", icon: <FaSuitcase className="text-primary" />, label: "Jobs" },
-                    { to: "/messages", icon: <FaEnvelopeOpenText className="text-primary" />, label: "Messages" },
                     { to: `/${username}`, icon: <FaUserFriends className="text-primary" />, label: "Profile" },
                 ].map(({ to, icon, label }) => (
                     <Link key={to} to={to} className="flex items-center gap-3 hover:bg-gray-200 p-3 rounded-full transition-all duration-300">

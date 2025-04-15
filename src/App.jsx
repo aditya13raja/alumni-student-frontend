@@ -10,7 +10,6 @@ import Topics from "./pages/Topics";
 import Stories from "./pages/Stories";
 import Resources from "./pages/Resources";
 import Roadmap from "./pages/Roadmap";
-import Messages from "./pages/Messages";
 import Chats from "./pages/Chats";
 import PrivateRoute from "./components/PrivateRoute";
 
@@ -56,7 +55,6 @@ function App() {
                         <Route path="/resources" element={<Resources />} />
                         <Route path="/roadmaps" element={<Roadmap />} />
                         <Route path="/topics/:topic" element={<Chats />}/>
-                        <Route path="/messages" element={<Messages />}/>
                     </Route>
                 </Route>
             </Routes>
