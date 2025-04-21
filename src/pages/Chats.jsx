@@ -143,8 +143,8 @@ const Chats = () => {
             <div ref={bottomRef}></div>
 
             {/* Send Message */}
-            <div className="pb-2 relative">
-                <div className="flex items-center space-x-4 fixed bottom-0 p-2 bg-gray-900 rounded-lg">
+            <div className="absolute bottom-4 left-1/2 transform -translate-x-1/2 w-full max-w-3xl px-4">
+                <div className="bg-gray-800 text-white rounded-2xl p-4 shadow-lg flex items-center justify-between">
                     <input
                         type="text"
                         className="flex-1 p-2 bg-gray-800 text-white border border-gray-700 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
@@ -155,7 +155,7 @@ const Chats = () => {
                     />
                     <button
                         onClick={handleSendMessage}
-                        className="p-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition duration-300"
+                        className="p-2 mx-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition duration-300"
                     >
                         <Send size={20} />
                     </button>
