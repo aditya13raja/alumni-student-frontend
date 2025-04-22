@@ -54,7 +54,7 @@ export default function Navbar() {
     };
 
     const navLinks = [
-        { to: "/topics", label: "Topic", icon: <FaSearch /> },
+        { to: "/topics", label: "Topics", icon: <FaSearch /> },
         { to: "/resources", label: "Resources", icon: <FaDatabase /> },
         { to: "/stories", label: "Stories", icon: <FaTrophy /> },
         { to: "/roadmaps", label: "Roadmap", icon: <FaRoad /> },
@@ -84,7 +84,7 @@ export default function Navbar() {
 
     return (
         <nav className="sticky top-0 z-50 w-full backdrop-blur-md bg-[hsl(var(--background))]/70 text-[hsl(var(--foreground))] border-b border-[hsl(var(--border))]">
-            <div className="mx-auto max-w-[960px] px-4 py-3 flex items-center justify-between">
+            <div className="mx-auto max-w-[960px] px-5 py-3 flex items-center justify-between">
                 {/* Logo */}
                 <Link to={"/"}>
                     <div className="flex items-center gap-3">

@@ -11,13 +11,14 @@ import Roadmap from "./pages/Roadmap";
 import Chats from "./pages/Chats";
 import PrivateRoute from "./components/PrivateRoute";
 import Navbar from "./components/Navbar";
+import CategoryLayout from "./pages/CategoryLayout";
 
 // Layout for authenticated pages (with sidebar)
 function MainLayout() {
     return (
         <div className="flex flex-col min-h-screen bg-[var(--bg-color)] text-[var(--text-color)]">
             <Navbar />
-            <div className="flex-1 p-1 max-w-[960px] mx-auto ">
+            <div className="flex-1 p-1 max-w-[960px] px-5 mx-auto ">
                 <Outlet /> {/* Nested routes will render here */}
             </div>
         </div>
@@ -49,11 +50,15 @@ function App() {
                         <Route path="/" element={<Home />} />
                         <Route path="/:username" element={<Profile />} />
                         <Route path="/jobs" element={<Jobs />} />
-                        <Route path="/topics" element={<Topics />} />
                         <Route path="/stories" element={<Stories />} />
                         <Route path="/resources" element={<Resources />} />
                         <Route path="/roadmaps" element={<Roadmap />} />
-                        <Route path="/topics/:topic" element={<Chats />}/>
+
+                        <Route path="/topics" element={<Topics />} />
+                        <Route path="/topics/:category" element={<CategoryLayout />}>
+                            <Route path=":topic" element={<Chats />} />
+                        </Route>                       
+                        { /* <Route path="/topics/:topic" element={<Chats />}/> */}
                     </Route>
                 </Route>
             </Routes>

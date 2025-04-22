@@ -16,7 +16,6 @@ const Chats = () => {
     const [chats, setChats] = useState([]);
     const { username, role } = useSelector((state) => state.user.currentUser);
     const bottomRef = useRef(null);
-    const [theme, setTheme] = useState(localStorage.getItem("theme") || "dark");
     const [message, setMessage] = useState("");
 
     // Get all chats from db
@@ -108,61 +107,59 @@ const Chats = () => {
     }
 
     return (
-        <div className="bg-secondary overflow-hidden">
-            <h1
-                className="text-4xl font-bold text-center uppercase text-primary tracking-wide mb-8 m-0"
+        <div className="flex flex-col h-screen bg-background text-foreground">
+            <header className="p-4 border-b text-center">
+                <h1 className="text-2xl font-bold uppercase tracking-wide">{topic}</h1>
+            </header>
+
+            {/* Chat messages */}
+            <div className="flex-1 overflow-y-auto p-4 space-y-2 scrollbar-hide">
+                {chats.length === 0 ? (
+                    <div className="text-center text-muted-foreground text-lg">
+                        Loading...
+                    </div>
+                ) : (
+                        chats.map((chat) => {
+                            const dateLabel = formatDateLabel(chat.Timestamp);
+                            const showDate = dateLabel !== lastDate;
+                            lastDate = dateLabel;
+
+                            return (
+                                <div key={chat.id}>
+                                    {showDate && (
+                                        <div className="text-center text-xs text-muted-foreground my-2">
+                                            <span className="bg-muted px-3 py-1 rounded-full">{dateLabel}</span>
+                                        </div>
+                                    )}
+                                    <ChatMessage chat={chat} currentUsername={username} />
+                                </div>
+                            );
+                        })
+                    )}
+                <div ref={bottomRef}></div>
+            </div>
+
+            {/* Chat input */}
+            <form
+                onSubmit={handleSendMessage}
+                className="p-4 bg-muted flex items-center gap-2 border-t"
             >
-                {topic}
-            </h1>
-            
-            <div className="pb-12 px-2 overflow-y-auto scrollbar-hide">
-            {chats.length === 0 ? (
-                <div className="text-3xl font-semibold">Loading...</div>
-            ) : (
-                    chats.map((chat) => {
-                        const dateLabel = formatDateLabel(chat.Timestamp);
-                        const showDate = dateLabel !== lastDate;
-                        lastDate = dateLabel;
-
-                        return (
-                            <div key={chat.id}>
-                                {showDate && (
-                                    <div className="text-center text-xs text-gray-400 my-2">
-                                        <span className="bg-gray-800 p-2 rounded-sm">
-                                            {dateLabel}
-                                        </span>
-                                    </div>
-                                )}
-                                <ChatMessage chat={chat} currentUsername={username} />
-                            </div>
-                        );
-                    })
-                )}
-            </div>
-
-            <div ref={bottomRef}></div>
-
-            {/* Send Message */}
-            <div className="absolute bottom-4 left-1/2 transform -translate-x-1/2 w-full max-w-3xl px-4">
-                <div className="bg-gray-800 text-white rounded-2xl p-4 shadow-lg flex items-center justify-between">
-                    <input
-                        type="text"
-                        className="flex-1 p-2 bg-gray-800 text-white border border-gray-700 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
-                        placeholder="Type a message..."
-                        value={message}
-                        onChange={(e) => setMessage(e.target.value)}
-                        onKeyDown={(e) => e.key === "Enter" && handleSendMessage()}
-                    />
-                    <button
-                        onClick={handleSendMessage}
-                        className="p-2 mx-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition duration-300"
-                    >
-                        <Send size={20} />
-                    </button>
-                </div>
-            </div>
-
+                <input
+                    type="text"
+                    className="flex-1 px-4 py-2 bg-background border border-border rounded-lg focus:outline-none focus:ring-2 focus:ring-primary text-foreground"
+                    placeholder="Type a message..."
+                    value={message}
+                    onChange={(e) => setMessage(e.target.value)}
+                />
+                <button
+                    type="submit"
+                    className="p-2 bg-primary text-white rounded-lg hover:bg-primary/90 transition"
+                >
+                    <Send size={20} />
+                </button>
+            </form>
         </div>
+
     );
 };
 

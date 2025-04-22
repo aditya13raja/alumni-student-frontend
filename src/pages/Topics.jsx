@@ -26,6 +26,9 @@ const Topics = () => {
 
     return (
         <div className="mt-5">
+            <h1 className="text-3xl font-bold text-[hsl(var(--foreground))] mb-6 text-center tracking-tight">
+                Topic Categories
+            </h1>
             <div>
                 {loading && (
                     <p className="text-center text-[var(--color-white)]">
