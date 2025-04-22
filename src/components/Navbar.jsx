@@ -83,13 +83,15 @@ export default function Navbar() {
     );
 
     return (
-        <nav className="sticky top-0 z-50 w-full backdrop-blur-md bg-[hsl(var(--background))]/70 text-[hsl(var(--foreground))] border-b border-[hsl(var(--border))]">
+        <nav className="sticky top-0 h-20 z-50 w-full bg-[hsl(var(--background))] text-[hsl(var(--foreground))] border-b border-[hsl(var(--border))]">
             <div className="mx-auto max-w-[960px] px-5 py-3 flex items-center justify-between">
                 {/* Logo */}
                 <Link to={"/"}>
                     <div className="flex items-center gap-3">
                         <img src={Logo} alt="Logo" className="h-10 w-auto" />
-                        <span className="font-bold text-xl text-[hsl(var(--foreground))]">Alumni Connect</span>
+                        <span className="font-bold text-xl text-[hsl(var(--foreground))]">
+                            Alumni Connect
+                        </span>
                     </div>
                 </Link>
 
@@ -109,11 +111,16 @@ export default function Navbar() {
                             <span>{last_name}</span>
                         </div>
                     </DropdownMenuTrigger>
-                    <DropdownMenuContent align="end" className="bg-[hsl(var(--popover))] text-[hsl(var(--popover-foreground))] border border-[hsl(var(--border))]">
+                    <DropdownMenuContent
+                        align="end"
+                        className="bg-[hsl(var(--popover))] text-[hsl(var(--popover-foreground))] border border-[hsl(var(--border))]"
+                    >
                         <DropdownMenuItem>
                             <Link to={`/${username}`}>Profile</Link>
                         </DropdownMenuItem>
-                        <DropdownMenuItem onClick={handleSignOut}>Sign Out</DropdownMenuItem>
+                        <DropdownMenuItem onClick={handleSignOut}>
+                            Sign Out
+                        </DropdownMenuItem>
                     </DropdownMenuContent>
                 </DropdownMenu>
 
@@ -130,21 +137,29 @@ export default function Navbar() {
 
             {/* Mobile Menu */}
             {mobileMenuOpen && (
-                <div className="md:hidden px-4 pb-4 flex flex-col gap-3 backdrop-blur-md bg-[hsl(var(--background))]/70 border-t border-[hsl(var(--border))]">
+                <div className="md:hidden px-4 pb-4 flex flex-col gap-3 bg-[hsl(var(--background))] border-t border-[hsl(var(--border))]">
                     {navLinks.map(({ to, label, icon }) => (
                         <NavItem key={to} to={to} label={label} icon={icon} />
                     ))}
                     <div className="mt-2 border-t border-[hsl(var(--border))] pt-2 flex flex-col gap-2">
-                        <Button variant="secondary" className="text-[hsl(var(--foreground))] bg-[hsl(var(--muted))] hover:bg-[hsl(var(--muted-foreground))]">
+                        <Button
+                            variant="secondary"
+                            className="text-[hsl(var(--foreground))] bg-[hsl(var(--muted))] hover:bg-[hsl(var(--accent))]"
+                        >
                             <Link to={`/${username}`}>Profile</Link>
                         </Button>
-                        <Button variant="ghost" onClick={handleSignOut} className="text-[hsl(var(--destructive))]">
+                        <Button
+                            variant="ghost"
+                            onClick={handleSignOut}
+                            className="text-[hsl(var(--destructive))]"
+                        >
                             Sign Out
                         </Button>
                     </div>
                 </div>
             )}
         </nav>
+
     );
 }
 

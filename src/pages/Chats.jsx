@@ -107,13 +107,16 @@ const Chats = () => {
     }
 
     return (
-        <div className="flex flex-col h-screen bg-background text-foreground">
-            <header className="p-4 border-b text-center">
-                <h1 className="text-2xl font-bold uppercase tracking-wide">{topic}</h1>
+        <div className="flex flex-col w-full min-h-[calc(100vh-5rem)] bg-[hsl(var(--background))] text-[hsl(var(--foreground))]">
+            {/* Header */}
+            <header className="px-6 py-4 border-b border-[hsl(var(--border))] shadow-sm bg-[hsl(var(--muted))]">
+                <h1 className="text-2xl md:text-3xl font-semibold tracking-wide text-center uppercase">
+                    {topic}
+                </h1>
             </header>
 
-            {/* Chat messages */}
-            <div className="flex-1 overflow-y-auto p-4 space-y-2 scrollbar-hide">
+            {/* Chat Messages */}
+            <div className="flex-1 overflow-y-auto px-4 md:px-8 py-6 space-y-4 scrollbar-hide">
                 {chats.length === 0 ? (
                     <div className="text-center text-muted-foreground text-lg">
                         Loading...
@@ -127,8 +130,10 @@ const Chats = () => {
                             return (
                                 <div key={chat.id}>
                                     {showDate && (
-                                        <div className="text-center text-xs text-muted-foreground my-2">
-                                            <span className="bg-muted px-3 py-1 rounded-full">{dateLabel}</span>
+                                        <div className="text-center text-xs text-muted-foreground my-4">
+                                            <span className="bg-[hsl(var(--muted))] px-4 py-1 rounded-full">
+                                                {dateLabel}
+                                            </span>
                                         </div>
                                     )}
                                     <ChatMessage chat={chat} currentUsername={username} />
@@ -139,27 +144,26 @@ const Chats = () => {
                 <div ref={bottomRef}></div>
             </div>
 
-            {/* Chat input */}
+            {/* Chat Input */}
             <form
                 onSubmit={handleSendMessage}
-                className="p-4 bg-muted flex items-center gap-2 border-t"
+                className="w-full px-4 md:px-8 py-4 bg-[hsl(var(--muted))] border-t border-[hsl(var(--border))] flex items-center gap-3"
             >
                 <input
                     type="text"
-                    className="flex-1 px-4 py-2 bg-background border border-border rounded-lg focus:outline-none focus:ring-2 focus:ring-primary text-foreground"
+                    className="flex-1 px-4 py-2 rounded-xl border border-[hsl(var(--border))] bg-[hsl(var(--background))] text-[hsl(var(--foreground))] placeholder:text-muted-foreground focus:outline-none focus:ring-2 focus:ring-[hsl(var(--primary))] transition"
                     placeholder="Type a message..."
                     value={message}
                     onChange={(e) => setMessage(e.target.value)}
                 />
                 <button
                     type="submit"
-                    className="p-2 bg-primary text-white rounded-lg hover:bg-primary/90 transition"
+                    className="p-3 rounded-xl bg-[hsl(var(--primary))] hover:bg-[hsl(var(--primary))/90] text-white transition"
                 >
-                    <Send size={20} />
+                    <Send size={16} />
                 </button>
             </form>
         </div>
-
     );
 };
 
