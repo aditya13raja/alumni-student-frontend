@@ -71,7 +71,7 @@ export default function Navbar() {
                 <div className="group-hover:scale-110 transition duration-200 text-[hsl(var(--foreground))]">
                     {icon}
                 </div>
-                <span className="mt-1 text-xs">{label}</span>
+                <span className="mt-1 text-base">{label}</span>
             </div>
 
             {/* Mobile: icon left of label */}

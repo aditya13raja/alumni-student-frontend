@@ -1,72 +1,53 @@
-import { FaSearch } from "react-icons/fa";
-import { Link } from "react-router-dom";
 import { useState, useEffect } from "react";
-
-const topics = [
-  { id: 1, title: "Web Development", description: "Learn front-end, back-end, and full-stack development." },
-  { id: 2, title: "Data Science", description: "Dive into machine learning, AI, and data analysis." },
-  { id: 3, title: "UX/UI Design", description: "Learn the principles of designing great user experiences." },
-  { id: 4, title: "Mobile Development", description: "Build apps for iOS and Android using modern frameworks." },
-  { id: 5, title: "Game Development", description: "Create interactive and immersive games for various platforms." },
-  { id: 6, title: "Cybersecurity", description: "Learn to protect systems, networks, and data from cyber threats." }
-];
+import CategoryCard from "../components/CategoryCard";
 
 const Topics = () => {
-  const [searchTerm, setSearchTerm] = useState("");
-  const [theme, setTheme] = useState(localStorage.getItem("theme") || "dark");
+    const [categories, setCategories] = useState([]);
+    const [loading, setLoading] = useState(false);
+    const [error, setError] = useState("");
 
-  useEffect(() => {
-    document.documentElement.classList.remove("light", "dark");
-    document.documentElement.classList.add(theme);
-    localStorage.setItem("theme", theme);
-  }, [theme]);
+    useEffect(() => {
+        const fetchCategories= async () => {
+            try {
+                setLoading(true);
+                const response = await fetch(`/api/categories/get-categories`)
+                const data = await response.json();
 
-  const filteredTopics = topics.filter(topic =>
-    topic.title.toLowerCase().includes(searchTerm.toLowerCase()) ||
-    topic.description.toLowerCase().includes(searchTerm.toLowerCase())
-  );
+                setCategories(data.categories)
+                setLoading(false);
+            } catch (error) {
+                setLoading(false);
+                setError("Error fetching user data: ", error);
+            }
+        };
 
-  return (
-    <div className={`flex flex-col min-h-screen ${theme === "dark" ? "bg-gray-900 text-white" : "bg-transparent text-black"} py-10 px-5`}>
-      <div className="flex items-center justify-between mb-8">
-        <div className="flex items-center">
-          <FaSearch className="text-blue-600 text-4xl mr-3" />
-          <h1 className="text-4xl font-semibold">Topics</h1>
+        fetchCategories();
+    }, []);
+
+    return (
+        <div className="mt-5">
+            <div>
+                {loading && (
+                    <p className="text-center text-[var(--color-white)]">
+                        Loading...
+                    </p>    
+                )}
+                {error && (
+                    <p className="text-4xl text-gray-500 text-center mt-5">
+                        Something went wrong!
+                    </p>
+                )}
+                {categories && !loading && !error && (
+                    <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 auto-rows-fr">
+                        {categories.map((cat) => (
+                            <CategoryCard key={cat.category} {...cat} />
+                        ))}
+                    </div>                
+                )}
+            </div>
         </div>
-        <div className="relative">
-          <input
-            type="text"
-            placeholder="Search Topics..."
-            value={searchTerm}
-            onChange={(e) => setSearchTerm(e.target.value)}
-            className={`border rounded-full px-4 py-2 pl-10 w-64 focus:outline-none focus:ring-2 focus:ring-blue-500 ${theme === "dark" ? "bg-gray-800 text-white border-gray-600" : "bg-transparent text-black border-gray-300 shadow-lg"}`}
-          />
-          <FaSearch className="absolute left-3 top-3 text-blue-500" />
-        </div>
-      </div>
-      <div className={`rounded-lg shadow-md p-6 ${theme === "dark" ? "bg-gray-800" : "bg-transparent"}`}>
-        <h2 className="text-2xl font-semibold text-blue-600 mb-4">Explore Topics</h2>
-        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6">
-          {filteredTopics.length > 0 ? (
-            filteredTopics.map(topic => (
-              <div
-                key={topic.id}
-                className={`p-6 rounded-lg shadow-lg hover:bg-blue-100 cursor-pointer transition-all duration-300 ${theme === "dark" ? "bg-gray-700 text-white" : "bg-gray-100 text-black"}`}
-              >
-                <h3 className="text-xl font-medium text-blue-600 mb-2">{topic.title}</h3>
-                <p className="text-gray-600 mb-4">{topic.description}</p>
-                <Link to={`/topics/${topic.id}`} className="text-blue-600 mt-2 border-b-2 border-blue-600">
-                  Read More...
-                </Link>
-              </div>
-            ))
-          ) : (
-            <p className="text-gray-500">No topics found.</p>
-          )}
-        </div>
-      </div>
-    </div>
-  );
+
+    )
 };
 
 export default Topics;
