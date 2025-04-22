@@ -1,10 +1,8 @@
 import { BrowserRouter, Routes, Route, Outlet } from "react-router-dom";
-import { useState, useEffect } from "react";
 import Home from "./pages/Home";
 import Profile from "./pages/Profile";
 import SignIn from "./pages/SignIn";
 import SignUp from "./pages/SignUp";
-import Sidebar from "./components/Sidebar";
 import Jobs from "./pages/Jobs";
 import Topics from "./pages/Topics";
 import Stories from "./pages/Stories";
@@ -12,13 +10,14 @@ import Resources from "./pages/Resources";
 import Roadmap from "./pages/Roadmap";
 import Chats from "./pages/Chats";
 import PrivateRoute from "./components/PrivateRoute";
+import Navbar from "./components/Navbar";
 
 // Layout for authenticated pages (with sidebar)
 function MainLayout() {
     return (
-        <div className="flex min-h-screen  bg-[var(--bg-color)] text-[var(--text-color)]">
-            <Sidebar />
-            <div className="flex-1 p-1">
+        <div className="flex flex-col min-h-screen bg-[var(--bg-color)] text-[var(--text-color)]">
+            <Navbar />
+            <div className="flex-1 p-1 max-w-[960px] mx-auto ">
                 <Outlet /> {/* Nested routes will render here */}
             </div>
         </div>
