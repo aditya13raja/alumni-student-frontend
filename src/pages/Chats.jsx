@@ -107,7 +107,7 @@ const Chats = () => {
     }
 
     return (
-        <div className="flex flex-col w-full min-h-[calc(100vh-5rem)] bg-[hsl(var(--background))] text-[hsl(var(--foreground))]">
+        <div className="relative flex flex-col w-full min-h-[calc(100vh-5rem)] bg-[hsl(var(--background))] text-[hsl(var(--foreground))]">
             {/* Header */}
             <header className="px-6 py-4 border-b border-[hsl(var(--border))] shadow-sm bg-[hsl(var(--muted))]">
                 <h1 className="text-2xl md:text-3xl font-semibold tracking-wide text-center uppercase">
@@ -116,7 +116,7 @@ const Chats = () => {
             </header>
 
             {/* Chat Messages */}
-            <div className="flex-1 overflow-y-auto px-4 md:px-8 py-6 space-y-4 scrollbar-hide">
+            <div className="flex-1 overflow-y-auto px-4 md:px-8 py-6 mb-10 space-y-4 scrollbar-hide">
                 {chats.length === 0 ? (
                     <div className="text-center text-muted-foreground text-lg">
                         Loading...
@@ -147,7 +147,7 @@ const Chats = () => {
             {/* Chat Input */}
             <form
                 onSubmit={handleSendMessage}
-                className="w-full px-4 md:px-8 py-4 bg-[hsl(var(--muted))] border-t border-[hsl(var(--border))] flex items-center gap-3"
+                className="w-full absolute bottom-0 px-4 md:px-8 py-4 bg-[hsl(var(--muted))] border-t border-[hsl(var(--border))] flex items-center gap-3"
             >
                 <input
                     type="text"

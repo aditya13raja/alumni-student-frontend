@@ -51,6 +51,8 @@ const ProfilePage = () => {
                             <p><span>Username:</span> {user?.username}</p>
                             <p><span>Email:</span> {user?.email}</p>
                         </div>
+                        <button>Edit</button>
+                        <button>Delete</button>
                     </div>
                 )}
             </div>

@@ -61,7 +61,7 @@ const CategoryLayout = () => {
             </div>
 
             {/* Chat Outlet */}
-            <main className="flex-1 flex flex-col w-full h-full overflow-hidden">
+            <main className="flex-1 flex flex-col w-full h-full overflow-auto">
                 <div className="flex-1 h-full w-full overflow-y-auto px-2 py-2">
                     <Outlet />
                 </div>
