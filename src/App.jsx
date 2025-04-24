@@ -13,6 +13,7 @@ import PrivateRoute from "./components/PrivateRoute";
 import Navbar from "./components/Navbar";
 import CategoryLayout from "./pages/CategoryLayout";
 import BlogEditor from "./pages/BlogEditor";
+import BlogViewer from "./pages/BlogViewer";
 
 // Layout for authenticated pages (with sidebar)
 function MainLayout() {
@@ -61,6 +62,7 @@ function App() {
                         </Route>                       
 
                         <Route path="/write-blog" element={<BlogEditor />} />
+                        <Route path="/blogs/:blogId" element={<BlogViewer/>} />
                     </Route>
                 </Route>
             </Routes>

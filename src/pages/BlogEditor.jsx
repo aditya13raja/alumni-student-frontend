@@ -10,14 +10,17 @@ import Heading from '@tiptap/extension-heading'
 import Paragraph from '@tiptap/extension-paragraph'
 import { useSelector } from 'react-redux'
 import MenuBar from '../components/MenuBar'
+import { useNavigate } from 'react-router-dom'
+
 
 
 const BlogEditor = () => {
     const [heading, setHeading] = useState('')
     const [coverImage, setCoverImage] = useState('')
     const currentUser = useSelector((state) => state.user.currentUser)
-
     const username = currentUser?.username;
+
+    const navigate = useNavigate();
 
     const boxStyle = "tiptap w-full border border-blue-100 p-4 shadow-lg rounded-md mt-6 bg-white";
 
@@ -46,6 +49,7 @@ const BlogEditor = () => {
             body: JSON.stringify({ heading, username, cover_image: coverImage, content })
         })
         const data = await resposne.json()
+        navigate(`/blogs/${data.id}`)
         console.log(data)
     }
 
