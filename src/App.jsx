@@ -5,7 +5,6 @@ import SignIn from "./pages/SignIn";
 import SignUp from "./pages/SignUp";
 import Jobs from "./pages/Jobs";
 import Topics from "./pages/Topics";
-import Stories from "./pages/Stories";
 import Resources from "./pages/Resources";
 import Roadmap from "./pages/Roadmap";
 import Chats from "./pages/Chats";
@@ -14,6 +13,7 @@ import Navbar from "./components/Navbar";
 import CategoryLayout from "./pages/CategoryLayout";
 import BlogEditor from "./pages/BlogEditor";
 import BlogViewer from "./pages/BlogViewer";
+import AlumniBlogs from "./pages/AlumniBlogs";
 
 // Layout for authenticated pages (with sidebar)
 function MainLayout() {
@@ -52,7 +52,6 @@ function App() {
                         <Route path="/" element={<Home />} />
                         <Route path="/:username" element={<Profile />} />
                         <Route path="/jobs" element={<Jobs />} />
-                        <Route path="/stories" element={<Stories />} />
                         <Route path="/resources" element={<Resources />} />
                         <Route path="/roadmaps" element={<Roadmap />} />
 
@@ -61,6 +60,7 @@ function App() {
                             <Route path=":topic" element={<Chats />} />
                         </Route>                       
 
+                        <Route path="/blogs" element={<AlumniBlogs />} />
                         <Route path="/write-blog" element={<BlogEditor />} />
                         <Route path="/blogs/:blogId" element={<BlogViewer/>} />
                     </Route>

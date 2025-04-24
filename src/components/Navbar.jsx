@@ -56,7 +56,7 @@ export default function Navbar() {
     const navLinks = [
         { to: "/topics", label: "Topics", icon: <FaSearch /> },
         { to: "/resources", label: "Resources", icon: <FaDatabase /> },
-        { to: "/stories", label: "Blogs", icon: <FaBookOpen/> },
+        { to: "/blogs", label: "Blogs", icon: <FaBookOpen/> },
         { to: "/roadmaps", label: "Roadmap", icon: <FaRoad /> },
         { to: "/jobs", label: "Jobs", icon: <FaSuitcase /> },
     ];
