@@ -7,6 +7,9 @@ const ProfilePage = () => {
     const [user, setUser] = useState(null);
     const [loading, setLoading] = useState(false);
     const [error, setError] = useState("");
+    const [isEditing, setIsEditing] = useState(false);
+    const [formData, setFormData] = useState({});
+    const [profilePic, setProfilePic] = useState(null);
 
     useEffect(() => {
         const fetchUser = async () => {
@@ -14,45 +17,150 @@ const ProfilePage = () => {
                 setLoading(true);
                 const response = await fetch(`/api/user/${username}`);
                 const data = await response.json();
-
-                setUser(data.user)
+                setUser(data.user);
+                setFormData(data.user);
+                setProfilePic(data.user.profile_picture || null); // image URL
                 setLoading(false);
             } catch (error) {
                 setLoading(false);
-                setError("Error fetching user data: ", error);
+                setError("Error fetching user data.");
+                console.error(error);
             }
         };
 
         fetchUser();
     }, [username]);
 
+    const handleEditToggle = () => setIsEditing(true);
+
+    const handleInputChange = (e) => {
+        setFormData({ ...formData, [e.target.name]: e.target.value });
+    };
+
+    const handleSave = async () => {
+        try {
+            const response = await fetch(`/api/user/${username}`, {
+                method: "PUT",
+                headers: {
+                    "Content-Type": "application/json",
+                },
+                body: JSON.stringify({ ...formData, profile_picture: profilePic }),
+            });
+
+            if (response.ok) {
+                const updatedUser = await response.json();
+                setUser(updatedUser.user);
+                setIsEditing(false);
+                alert("Profile updated successfully.");
+            } else {
+                alert("Failed to update profile.");
+            }
+        } catch (error) {
+            console.error("Error updating user:", error);
+        }
+    };
+
+    const handleDelete = async () => {
+        const confirmDelete = window.confirm("Are you sure you want to delete this profile?");
+        if (!confirmDelete) return;
+
+        try {
+            const response = await fetch(`/api/user/${username}`, {
+                method: "DELETE",
+            });
+
+            if (response.ok) {
+                alert("User deleted successfully!");
+                setUser(null);
+            } else {
+                alert("Failed to delete user.");
+            }
+        } catch (error) {
+            console.error("Error deleting user:", error);
+        }
+    };
+
+    const handleImageChange = (e) => {
+        const file = e.target.files[0];
+        if (file) {
+            const reader = new FileReader();
+            reader.onloadend = () => {
+                setProfilePic(reader.result); // base64 image string
+            };
+            reader.readAsDataURL(file);
+        }
+    };
+
     return (
-        <div>
-            <div>
-                {loading && (
-                    <p className="text-center text-[var(--color-white)]">
-                        Loading...
-                    </p>    
-                )}
-                {error && (
-                    <p className="text-4xl text-gray-500 text-center mt-5">
-                        Something went wrong!
-                    </p>
-                )}
+        <div className="min-h-screen w-full bg-transparent-to-br from-blue-50 to-white flex items-center justify-center p-1">
+            <div className="w-full max-w-4xl bg-white p-10 rounded-3xl shadow-2xl">
+                {loading && <p className="text-center text-gray-600 text-lg">Loading...</p>}
+                {error && <p className="text-center text-red-500 text-lg">{error}</p>}
+
                 {user && !loading && !error && (
                     <div>
-                        <h1 className="text-3xl font-bold text-[var(--color-primary)] mb-4">Profile</h1>
-                        <div className="text-left space-y-3">
-                            <p><span>Name:</span> {user?.first_name} {user?.last_name}</p>
-                            <p><span>Age:</span> {user?.age}</p>
-                            <p><span>Role:</span> {user?.role}</p>
-                            <p><span>Degree:</span> {user?.degree} ({user?.major})</p>
-                            <p><span>Passing Year:</span> {user?.passing_year}</p>
-                            <p><span>Username:</span> {user?.username}</p>
-                            <p><span>Email:</span> {user?.email}</p>
+                        <h1 className="text-4xl font-bold text-blue-400 mb-6 text-center">User Profile</h1>
+
+                        {/* Profile Picture Section */}
+                        <div className="flex flex-col items-center mb-8">
+                            <img
+                                src={profilePic || "./src/assets/placeholder.png"}
+                                className="w-32 h-32 rounded-full border-4 border-blue-300 object-cover shadow-md"
+                            />
+                            {isEditing && (
+                                <input
+                                    type="file"
+                                    accept="image/*"
+                                    onChange={handleImageChange}
+                                    className="mt-4 text-sm"
+                                />
+                            )}
                         </div>
-                        <button>Edit</button>
-                        <button>Delete</button>
+
+                        <div className="grid grid-cols-1 md:grid-cols-2 gap-6 text-gray-800 text-base">
+                            {["first_name", "last_name", "age", "role", "degree", "major", "passing_year", "username", "email"].map((field) => (
+                                <div key={field}>
+                                    <label className="block font-semibold capitalize mb-1">
+                                        {field.replace("_", " ")}:
+                                    </label>
+                                    {isEditing ? (
+                                        <input
+                                            type={field === "age" || field === "passing_year" ? "number" : "text"}
+                                            name={field}
+                                            value={formData[field] || ""}
+                                            onChange={handleInputChange}
+                                            className="w-full border border-gray-300 rounded-lg px-3 py-2"
+                                        />
+                                    ) : (
+                                        <p className="w-full border border-gray-300 rounded-lg px-3 py-2">{user[field]}</p>
+                                    )}
+                                </div>
+                            ))}
+                        </div>
+
+                        <div className="mt-10 flex flex-wrap gap-4 justify-center md:justify-end">
+                            {!isEditing ? (
+                                <button
+                                    onClick={handleEditToggle}
+                                    className="bg-blue-600 text-white px-6 py-2 rounded-lg hover:bg-blue-700 transition duration-200"
+                                >
+                                    Edit
+                                </button>
+                            ) : (
+                                <button
+                                    onClick={handleSave}
+                                    className="bg-green-600 text-white px-6 py-2 rounded-lg hover:bg-green-700 transition duration-200"
+                                >
+                                    Save
+                                </button>
+                            )}
+                            <button
+                                onClick={handleDelete}
+                                className="bg-red-600 text-white px-6 py-2 rounded-lg hover:bg-red-700 transition duration-200"
+                            >
+                                Delete
+                            </button>
+                        </div>
                     </div>
                 )}
             </div>
@@ -61,4 +169,3 @@ const ProfilePage = () => {
 };
 
 export default ProfilePage;
-
