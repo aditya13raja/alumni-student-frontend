@@ -10,11 +10,11 @@ import {
 import {
     FaSearch,
     FaDatabase,
-    FaTrophy,
     FaRoad,
     FaSuitcase,
     FaBars,
     FaTimes,
+    FaBookOpen,
 } from "react-icons/fa";
 import { FaCircleUser } from "react-icons/fa6";
 import { useDispatch, useSelector } from "react-redux";
@@ -56,7 +56,7 @@ export default function Navbar() {
     const navLinks = [
         { to: "/topics", label: "Topics", icon: <FaSearch /> },
         { to: "/resources", label: "Resources", icon: <FaDatabase /> },
-        { to: "/stories", label: "Stories", icon: <FaTrophy /> },
+        { to: "/stories", label: "Blogs", icon: <FaBookOpen/> },
         { to: "/roadmaps", label: "Roadmap", icon: <FaRoad /> },
         { to: "/jobs", label: "Jobs", icon: <FaSuitcase /> },
     ];

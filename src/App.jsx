@@ -12,6 +12,7 @@ import Chats from "./pages/Chats";
 import PrivateRoute from "./components/PrivateRoute";
 import Navbar from "./components/Navbar";
 import CategoryLayout from "./pages/CategoryLayout";
+import BlogEditor from "./pages/BlogEditor";
 
 // Layout for authenticated pages (with sidebar)
 function MainLayout() {
@@ -58,7 +59,8 @@ function App() {
                         <Route path="/topics/:category" element={<CategoryLayout />}>
                             <Route path=":topic" element={<Chats />} />
                         </Route>                       
-                        { /* <Route path="/topics/:topic" element={<Chats />}/> */}
+
+                        <Route path="/write-blog" element={<BlogEditor />} />
                     </Route>
                 </Route>
             </Routes>

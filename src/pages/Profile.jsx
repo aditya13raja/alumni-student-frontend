@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react";
-import { useParams } from "react-router-dom";
+import { useParams, Link } from "react-router-dom";
 
 const ProfilePage = () => {
     const { username } = useParams();
@@ -161,6 +161,19 @@ const ProfilePage = () => {
                                 Delete
                             </button>
                         </div>
+
+                        {user.role === "Alumni" ? (
+                            <div className="flex flex-col my-4">
+                                <Link to="/write-blog">
+                                    <button
+                                        className="bg-green-600 w-full text-white px-6 py-2 rounded-lg hover:bg-green-700 transition duration-200"
+                                    >
+                                        Write a blog
+                                    </button>
+                                </Link>
+                            </div>
+                        ) : null
+                        }
                     </div>
                 )}
             </div>
