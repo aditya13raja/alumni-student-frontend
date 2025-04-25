@@ -55,7 +55,10 @@ const BlogEditor = () => {
 
 
     return (
-        <div className="pt-[8rem] max-w-4xl mx-auto px-4">
+        <div className="mt-5 max-w-4xl mx-auto px-4">
+            <h1 className="text-3xl font-bold text-[hsl(var(--foreground))] mb-6 text-center tracking-tight">
+                Write your blog
+            </h1>
             <div className="mb-4 space-y-2">
                 <input
                     type="text"
