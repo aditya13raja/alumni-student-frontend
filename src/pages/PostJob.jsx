@@ -49,6 +49,7 @@ const PostJob = () => {
             });
 
             const data = await response.json();
+            navigate(`/jobs/${data.id}`)
         } catch (error) {
             console.error('Error submitting job:', error);
         }

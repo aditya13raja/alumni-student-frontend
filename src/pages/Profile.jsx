@@ -163,12 +163,19 @@ const ProfilePage = () => {
                         </div>
 
                         {user.role === "Alumni" ? (
-                            <div className="flex flex-col my-4">
+                            <div className="flex flex-col my-4 space-y-2">
                                 <Link to="/write-blog">
                                     <button
                                         className="bg-green-600 w-full text-white px-6 py-2 rounded-lg hover:bg-green-700 transition duration-200"
                                     >
                                         Write a blog
+                                    </button>
+                                </Link>
+                                <Link to="/post-job">
+                                    <button
+                                        className="bg-green-600 w-full text-white px-6 py-2 rounded-lg hover:bg-green-700 transition duration-200"
+                                    >
+                                        Create job posting
                                     </button>
                                 </Link>
                             </div>

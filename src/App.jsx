@@ -3,7 +3,7 @@ import Home from "./pages/Home";
 import Profile from "./pages/Profile";
 import SignIn from "./pages/SignIn";
 import SignUp from "./pages/SignUp";
-import Jobs from "./pages/Jobs";
+import JobPostings from "./pages/JobPostings";
 import Topics from "./pages/Topics";
 import Resources from "./pages/Resources";
 import Roadmap from "./pages/Roadmap";
@@ -65,7 +65,7 @@ function App() {
                         <Route path="/write-blog" element={<BlogEditor />} />
                         <Route path="/blogs/:blogId" element={<BlogViewer/>} />
 
-                        <Route path="/jobs" element={<Jobs />} />
+                        <Route path="/jobs" element={<JobPostings />} />
                         <Route path="/post-job" element={<PostJob />} />
                         <Route path="/jobs/:id" element={<JobDescription />} />
                     </Route>
