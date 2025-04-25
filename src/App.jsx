@@ -15,6 +15,7 @@ import BlogEditor from "./pages/BlogEditor";
 import BlogViewer from "./pages/BlogViewer";
 import AlumniBlogs from "./pages/AlumniBlogs";
 import PostJob from "./pages/PostJob";
+import JobDescription from "./pages/JobDescription";
 
 // Layout for authenticated pages (with sidebar)
 function MainLayout() {
@@ -66,6 +67,7 @@ function App() {
 
                         <Route path="/jobs" element={<Jobs />} />
                         <Route path="/post-job" element={<PostJob />} />
+                        <Route path="/jobs/:id" element={<JobDescription />} />
                     </Route>
                 </Route>
             </Routes>
