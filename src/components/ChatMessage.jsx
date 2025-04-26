@@ -1,6 +1,4 @@
-import React from "react";
-
-const ChatMessage = ({ chat, currentUsername }) => {
+const ChatMessage = ({ chat, currentUsername, topicname }) => {
   const isOwnMessage = chat.username === currentUsername;
 
   // alignment & background
@@ -17,9 +15,9 @@ const ChatMessage = ({ chat, currentUsername }) => {
   });
 
   return (
-    <div className={`flex ${alignmentClass} my-2`}>
+      <div className={`flex ${alignmentClass} w-full`}>
       <div
-        className="max-w-xs px-4 py-2 rounded-lg text-sm shadow"
+        className="px-4 py-2 my-2 rounded-lg text-sm shadow max-w-[80%]"
         style={{
           backgroundColor,
           color: "#f9e8e1",
@@ -30,11 +28,11 @@ const ChatMessage = ({ chat, currentUsername }) => {
             {chat.username}
           </h3>
         )}
-        <p className="text-base">{chat.msg_content}</p>
+        <p className="text-base break-words">{chat.msg_content}</p>
         <div className="text-[10px] text-right opacity-70">{formattedTime}</div>
       </div>
     </div>
-  );
+      );
 };
 
 export default ChatMessage;

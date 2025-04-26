@@ -10,7 +10,7 @@ import Roadmap from "./pages/Roadmap";
 import Chats from "./pages/Chats";
 import PrivateRoute from "./components/PrivateRoute";
 import Navbar from "./components/Navbar";
-import CategoryLayout from "./pages/CategoryLayout";
+import TopicChats from "./pages/TopicChats";
 import BlogEditor from "./pages/BlogEditor";
 import BlogViewer from "./pages/BlogViewer";
 import AlumniBlogs from "./pages/AlumniBlogs";
@@ -57,7 +57,7 @@ function App() {
                         <Route path="/roadmaps" element={<Roadmap />} />
 
                         <Route path="/topics" element={<Topics />} />
-                        <Route path="/topics/:category" element={<CategoryLayout />}>
+                        <Route path="/topics/:category" element={<TopicChats />}>
                             <Route path=":topic" element={<Chats />} />
                         </Route>                       
 

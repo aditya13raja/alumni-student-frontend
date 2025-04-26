@@ -83,7 +83,7 @@ export default function Navbar() {
     );
 
     return (
-        <nav className="sticky top-0 h-20 z-50 w-full bg-[hsl(var(--background))] text-[hsl(var(--foreground))] border-b border-[hsl(var(--border))]">
+        <nav className="sticky top-0 h-20 z-50 w-full bg-[hsl(var(--background))]/40 backdrop-blur-xl text-[hsl(var(--foreground))] border-b border-[hsl(var(--border))]">
             <div className="mx-auto max-w-[960px] px-5 py-3 flex items-center justify-between">
                 {/* Logo */}
                 <Link to={"/"}>
