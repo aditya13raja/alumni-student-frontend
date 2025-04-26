@@ -15,17 +15,11 @@ const TopicChats = () => {
         fetchTopics();
     }, [category]);
 
-    useEffect(() => {
-        if (topics.length > 0) {
-            navigate(`/topics/${category}/${topics[0].topic_name}`, { replace: true });
-        }
-    }, [topics, category, navigate]);
-
     return (
     <div className="flex justify-center w-full" style={{ height: "calc(100vh - 6rem)" }}>
       <div className="flex w-full max-w-[960px] h-full">
         {/* Sidebar */}
-        <aside className="hidden md:flex flex-col w-56 border-r border-[hsl(var(--border))] bg-[hsl(var(--background))] text-[hsl(var(--foreground))] overflow-hidden">
+        <aside className="hidden md:flex flex-col min-w-56 border-r border-[hsl(var(--border))] bg-[hsl(var(--background))] text-[hsl(var(--foreground))] overflow-hidden">
           <div className="px-4 py-5 border-b border-[hsl(var(--border))] bg-[hsl(var(--muted))]">
             <h2 className="text-2xl font-bold text-center">Topics</h2>
           </div>

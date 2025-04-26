@@ -46,7 +46,7 @@ const ProfilePage = () => {
                 headers: {
                     "Content-Type": "application/json",
                 },
-                body: JSON.stringify({ ...formData, profile_picture: profilePic }),
+                body: JSON.stringify({ ...formData }),
             });
 
             if (response.ok) {
