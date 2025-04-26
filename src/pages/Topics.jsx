@@ -41,7 +41,7 @@ const Topics = () => {
                     </p>
                 )}
                 {categories && !loading && !error && (
-                    <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 auto-rows-fr">
+                    <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 auto-rows-fr">
                         {categories.map((cat) => (
                             <CategoryCard key={cat.category} {...cat} />
                         ))}

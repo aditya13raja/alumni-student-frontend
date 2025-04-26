@@ -4,7 +4,7 @@ import { Link } from "react-router-dom";
 const CategoryCard = ({ category, category_fullname, category_description }) => {
   return (
     <Link to={`/topics/${category}`} className="h-full">
-      <Card className="h-full bg-[hsl(var(--background))]/70 backdrop-blur-md border border-[hsl(var(--border))] hover:shadow-lg transition-all duration-300 rounded-2xl flex flex-col justify-between">
+      <Card className="h-full bg-[hsl(var(--background))]/70 backdrop-blur-md border border-[hsl(var(--border))] hover:shadow-lg hover:scale-105 transition-all duration-300 rounded-2xl flex flex-col justify-between">
         <CardHeader>
           <CardTitle className="text-xl text-[hsl(var(--foreground))]">
             {category_fullname}

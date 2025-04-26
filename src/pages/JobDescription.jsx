@@ -22,8 +22,8 @@ const JobDescription = () => {
     if (!job) return <div className="text-center mt-10 text-gray-500">Loading...</div>;
 
     return (
-        <div className="mx-auto p-6 bg-white shadow-xl rounded-lg mt-10 space-y-6">
-            <div className="flex justify-between items-start">
+        <div className="mx-auto w-full p-6 bg-white shadow-xl rounded-lg mt-10 space-y-6">
+            <div className="flex justify-between items-start gap-6">
                 <h1 className="text-3xl font-bold text-blue-800">{job.job_role}</h1>
                 {job.job_link && (
                     <a

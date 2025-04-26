@@ -83,14 +83,12 @@ const JobPostings = () => {
                         <Link
                             to={`/jobs/${job.id}`}
                             key={job.id}
-                            className="border border-blue-100 min-w-64 shadow-md rounded-xl p-4 space-y-3 hover:shadow-xl transition"
+                            className="border border-blue-100 bg-[hsl(var(--background))]/70 min-w-64 shadow-md rounded-xl p-4 space-y-3 hover:shadow-xl hover:scale-105 transition"
                         >
-                            <div className="flex flex-col justify-between items-start">
-                                <h2 className="text-lg truncate font-bold text-[hsl(var(--foreground))]">
-                                    {job.job_role}
-                                </h2>
-                                <p className="text-sm text-gray-600">{job.company_name}</p>
-                            </div>
+                            <h2 className="text-lg truncate font-bold text-[hsl(var(--foreground))]">
+                                {job.job_role}
+                            </h2>
+                            <p className="text-md font-semibold text-[hsl(var(--muted-foreground))] ">{job.company_name}</p>
 
                             <div className="flex gap-2 text-xs">
                                 <span className="bg-blue-100 px-2 py-1 rounded-full">
@@ -101,7 +99,7 @@ const JobPostings = () => {
                                 </span>
                             </div>
 
-                            <p className="text-xs text-gray-400">
+                            <p className="text-xs text-[hsl(var(--muted-foreground))] ">
                                 Posted on {new Date(job.created_at).toLocaleDateString()}
                             </p>
 
