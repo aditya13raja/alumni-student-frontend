@@ -37,7 +37,7 @@ const ProfilePage = () => {
         setFormData({ ...formData, [e.target.name]: e.target.value });
     };
 
-    const alumniButtons = "border border-green-600 w-full text-black px-6 py-2 rounded-lg hover:bg-green-600 hover:text-white transition duration-200";
+    const alumniButtons = "border border-blue-600 w-full text-black px-6 py-2 rounded-lg hover:bg-blue-600 hover:text-white transition duration-200";
 
     const handleSave = async () => {
         try {

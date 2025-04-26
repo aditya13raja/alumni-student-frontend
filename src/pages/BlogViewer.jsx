@@ -1,6 +1,14 @@
 import { useEffect, useState } from 'react'
 import { EditorContent, useEditor } from '@tiptap/react'
 import StarterKit from '@tiptap/starter-kit'
+import TextStyle from '@tiptap/extension-text-style'
+import Heading from '@tiptap/extension-heading'
+import ListItem from '@tiptap/extension-list-item'
+import BulletList from '@tiptap/extension-bullet-list'
+import OrderedList from '@tiptap/extension-ordered-list'
+import Underline from '@tiptap/extension-underline'
+import Alignment from '@tiptap/extension-text-align'
+import Highlight from '@tiptap/extension-highlight';
 import { useParams } from 'react-router-dom'
 
 const BlogViewer = () => {
@@ -9,7 +17,17 @@ const BlogViewer = () => {
 
   const editor = useEditor({
     editable: false,
-    extensions: [StarterKit],
+    extensions: [
+      StarterKit,
+      TextStyle,
+      Heading,
+      BulletList,
+      OrderedList,
+      ListItem,
+      Underline,
+      Alignment,
+      Highlight,
+    ],
     content: '', // empty initially
   })
 

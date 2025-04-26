@@ -14,7 +14,7 @@ const SignUp = () => {
         first_name: "",
         last_name: "",
         email: "",
-        role: "Alumni",
+        role: "alumni",
         age: 22,
         degree: "",
         major: "",
@@ -124,8 +124,8 @@ const SignUp = () => {
                             onChange={handleChange}
                             className="w-1/2 p-2 border rounded-lg"
                         >
-                            <option value="Alumni">Alumni</option>
-                            <option value="Student">Student</option>
+                            <option value="alumni">Alumni</option>
+                            <option value="student">Student</option>
                         </select>
                         <input
                             type="number"
