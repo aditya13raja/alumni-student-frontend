@@ -56,7 +56,7 @@ const BlogEditor = () => {
 
     return (
         <div className="mt-5 max-w-4xl mx-auto px-4">
-            <h1 className="text-3xl font-bold text-[hsl(var(--foreground))] mb-6 text-center tracking-tight">
+            <h1 className="text-4xl font-bold text-blue-900 mb-6 text-center tracking-tight">
                 Write your blog
             </h1>
             <div className="mb-4 space-y-2">

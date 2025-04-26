@@ -1,45 +1,47 @@
-import { useState, useEffect } from "react";
-import { useParams, Link } from "react-router-dom";
+import { useState, useEffect, useRef } from "react";
+import { useParams, Link, useNavigate } from "react-router-dom";
 
 const ProfilePage = () => {
     const { username } = useParams();
 
+    const fileRef = useRef(null);
     const [user, setUser] = useState(null);
     const [loading, setLoading] = useState(false);
     const [error, setError] = useState("");
-    const [isEditing, setIsEditing] = useState(false);
     const [formData, setFormData] = useState({});
     const [profilePic, setProfilePic] = useState(null);
 
-    useEffect(() => {
-        const fetchUser = async () => {
-            try {
-                setLoading(true);
-                const response = await fetch(`/api/user/${username}`);
-                const data = await response.json();
-                setUser(data.user);
-                setFormData(data.user);
-                setProfilePic(data.user.profile_picture || null); // image URL
-                setLoading(false);
-            } catch (error) {
-                setLoading(false);
-                setError("Error fetching user data.");
-                console.error(error);
-            }
-        };
+    const navigate = useNavigate();
 
+    const fetchUser = async () => {
+        try {
+            setLoading(true);
+            const response = await fetch(`/api/user/${username}`);
+            const data = await response.json();
+            setUser(data.user);
+            setFormData(data.user);
+            setProfilePic(data.user.profile_picture || null);
+            setLoading(false);
+        } catch (error) {
+            setLoading(false);
+            setError("Error fetching user data.");
+            console.error(error);
+        }
+    };
+
+    useEffect(() => {
         fetchUser();
     }, [username]);
-
-    const handleEditToggle = () => setIsEditing(true);
 
     const handleInputChange = (e) => {
         setFormData({ ...formData, [e.target.name]: e.target.value });
     };
 
+    const alumniButtons = "border border-green-600 w-full text-black px-6 py-2 rounded-lg hover:bg-green-600 hover:text-white transition duration-200";
+
     const handleSave = async () => {
         try {
-            const response = await fetch(`/api/user/${username}`, {
+            const response = await fetch(`/api/user/${username}/update`, {
                 method: "PUT",
                 headers: {
                     "Content-Type": "application/json",
@@ -48,10 +50,8 @@ const ProfilePage = () => {
             });
 
             if (response.ok) {
-                const updatedUser = await response.json();
-                setUser(updatedUser.user);
-                setIsEditing(false);
                 alert("Profile updated successfully.");
+                fetchUser();
             } else {
                 alert("Failed to update profile.");
             }
@@ -65,13 +65,14 @@ const ProfilePage = () => {
         if (!confirmDelete) return;
 
         try {
-            const response = await fetch(`/api/user/${username}`, {
+            const response = await fetch(`/api/user/${username}/delete`, {
                 method: "DELETE",
             });
 
             if (response.ok) {
                 alert("User deleted successfully!");
                 setUser(null);
+                navigate('/signin');
             } else {
                 alert("Failed to delete user.");
             }
@@ -85,75 +86,65 @@ const ProfilePage = () => {
         if (file) {
             const reader = new FileReader();
             reader.onloadend = () => {
-                setProfilePic(reader.result); // base64 image string
+                setProfilePic(reader.result);
             };
             reader.readAsDataURL(file);
         }
     };
 
     return (
-        <div className="min-h-screen w-full bg-transparent-to-br from-blue-50 to-white flex items-center justify-center p-1">
-            <div className="w-full max-w-4xl bg-white p-10 rounded-3xl shadow-2xl">
+        <div className="min-h-screen w-full mt-4  items-center justify-center p-1">
+            <h1 className="text-4xl font-bold text-blue-900 mb-6 text-center">User Profile</h1>
+            <div className="w-full max-w-4xl p-10 rounded-3xl shadow-2xl border border-blue-100 bg-[hsl(var(--background))]/70 backdrop-blur-md ">
                 {loading && <p className="text-center text-gray-600 text-lg">Loading...</p>}
                 {error && <p className="text-center text-red-500 text-lg">{error}</p>}
 
                 {user && !loading && !error && (
                     <div>
-                        <h1 className="text-4xl font-bold text-blue-400 mb-6 text-center">User Profile</h1>
+                        <p className="text-center text-gray-500 text-lg mb-6 capitalize">
+                            Role: {user.role}
+                        </p>
 
-                        {/* Profile Picture Section */}
                         <div className="flex flex-col items-center mb-8">
                             <img
                                 src={profilePic || "./src/assets/placeholder.png"}
-                                className="w-32 h-32 rounded-full border-4 border-blue-300 object-cover shadow-md"
+                                onClick={() => fileRef.current.click()}
+                                className="w-32 h-32 rounded-full cursor-pointer border-4 border-blue-300 object-cover shadow-md"
                             />
-                            {isEditing && (
-                                <input
-                                    type="file"
-                                    accept="image/*"
-                                    onChange={handleImageChange}
-                                    className="mt-4 text-sm"
-                                />
-                            )}
+                            <input
+                                type="file"
+                                accept="image/*"
+                                hidden
+                                onChange={handleImageChange}
+                                ref={fileRef}
+                                className="mt-4 text-sm items-center"
+                            />
                         </div>
 
                         <div className="grid grid-cols-1 md:grid-cols-2 gap-6 text-gray-800 text-base">
-                            {["first_name", "last_name", "age", "role", "degree", "major", "passing_year", "username", "email"].map((field) => (
+                            {["first_name", "last_name", "age", "degree", "major", "passing_year", "username", "email"].map((field) => (
                                 <div key={field}>
                                     <label className="block font-semibold capitalize mb-1">
                                         {field.replace("_", " ")}:
                                     </label>
-                                    {isEditing ? (
-                                        <input
-                                            type={field === "age" || field === "passing_year" ? "number" : "text"}
-                                            name={field}
-                                            value={formData[field] || ""}
-                                            onChange={handleInputChange}
-                                            className="w-full border border-gray-300 rounded-lg px-3 py-2"
-                                        />
-                                    ) : (
-                                        <p className="w-full border border-gray-300 rounded-lg px-3 py-2">{user[field]}</p>
-                                    )}
+                                    <input
+                                        type={field === "age" || field === "passing_year" ? "number" : "text"}
+                                        name={field}
+                                        value={formData[field] || ""}
+                                        onChange={handleInputChange}
+                                        className="w-full border border-gray-300 rounded-lg px-3 py-2"
+                                    />
                                 </div>
                             ))}
                         </div>
 
-                        <div className="mt-10 flex flex-wrap gap-4 justify-center md:justify-end">
-                            {!isEditing ? (
-                                <button
-                                    onClick={handleEditToggle}
-                                    className="bg-blue-600 text-white px-6 py-2 rounded-lg hover:bg-blue-700 transition duration-200"
-                                >
-                                    Edit
-                                </button>
-                            ) : (
-                                <button
-                                    onClick={handleSave}
-                                    className="bg-green-600 text-white px-6 py-2 rounded-lg hover:bg-green-700 transition duration-200"
-                                >
-                                    Save
-                                </button>
-                            )}
+                        <div className="mt-10 flex justify-between ">
+                            <button
+                                onClick={handleSave}
+                                className="bg-green-600 text-white px-6 py-2 rounded-lg hover:bg-green-700 transition duration-200"
+                            >
+                                Update
+                            </button>
                             <button
                                 onClick={handleDelete}
                                 className="bg-red-600 text-white px-6 py-2 rounded-lg hover:bg-red-700 transition duration-200"
@@ -162,25 +153,22 @@ const ProfilePage = () => {
                             </button>
                         </div>
 
-                        {user.role === "Alumni" ? (
+                        {user.role === "alumni" && (
                             <div className="flex flex-col my-4 space-y-2">
+                                <hr className="my-8 border-gray-300" />
+                                <h2 className="text-center mb-2 text-xl">Alumni Options</h2>
                                 <Link to="/write-blog">
-                                    <button
-                                        className="bg-green-600 w-full text-white px-6 py-2 rounded-lg hover:bg-green-700 transition duration-200"
-                                    >
+                                    <button className={alumniButtons}>
                                         Write a blog
                                     </button>
                                 </Link>
                                 <Link to="/post-job">
-                                    <button
-                                        className="bg-green-600 w-full text-white px-6 py-2 rounded-lg hover:bg-green-700 transition duration-200"
-                                    >
+                                    <button className={alumniButtons}>
                                         Create job posting
                                     </button>
                                 </Link>
                             </div>
-                        ) : null
-                        }
+                        )}
                     </div>
                 )}
             </div>
@@ -189,3 +177,4 @@ const ProfilePage = () => {
 };
 
 export default ProfilePage;
+

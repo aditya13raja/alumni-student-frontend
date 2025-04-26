@@ -57,7 +57,7 @@ const PostJob = () => {
 
     return (
         <div className='mt-5 mb-8'>
-            <h1 className="text-3xl font-bold text-[hsl(var(--foreground))] mb-6 text-center tracking-tight">
+            <h1 className="text-4xl font-bold text-blue-900 mb-6 text-center tracking-tight">
                 Post Job
             </h1>
             <form onSubmit={handleSubmit} className="max-w-xl mx-auto">

@@ -25,7 +25,7 @@ const AlumniBlogs = () => {
 
     return (
         <div className="mt-5">
-            <h1 className="text-3xl font-bold text-[hsl(var(--foreground))] mb-6 text-center tracking-tight">
+            <h1 className="text-4xl font-bold text-blue-900 mb-6 text-center tracking-tight">
                 Alumni Blogs
             </h1>
 

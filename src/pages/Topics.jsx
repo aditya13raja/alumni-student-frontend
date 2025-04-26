@@ -26,7 +26,7 @@ const Topics = () => {
 
     return (
         <div className="mt-5">
-            <h1 className="text-3xl font-bold text-[hsl(var(--foreground))] mb-6 text-center tracking-tight">
+            <h1 className="text-4xl text-blue-900 font-bold mb-6 text-center tracking-tight">
                 Topic Categories
             </h1>
             <div>
