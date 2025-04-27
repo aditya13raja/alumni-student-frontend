@@ -59,6 +59,7 @@ export default function Navbar() {
         { to: "/blogs", label: "Blogs", icon: <FaBookOpen/> },
         { to: "/roadmaps", label: "Roadmap", icon: <FaRoad /> },
         { to: "/jobs", label: "Jobs", icon: <FaSuitcase /> },
+        { to: "/about", label: "About Us", icon: <FaCircleUser /> },
     ];
 
     const NavItem = ({ to, label, icon }) => (
