@@ -1,8 +1,8 @@
-const ChatMessage = ({ chat, currentUsername, topicname }) => {
+const ChatMessage = ({ chat, currentUsername }) => {
   const isOwnMessage = chat.username === currentUsername;
 
   // alignment & background
-  const alignmentClass = isOwnMessage ? "justify-start" : "justify-end";
+  const alignmentClass = isOwnMessage ? "justify-end" : "justify-start";
   const backgroundColor = isOwnMessage
     ? "#064e3b" // dark green
     : chat.role === "alumni"

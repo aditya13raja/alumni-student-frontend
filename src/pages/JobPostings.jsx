@@ -78,7 +78,7 @@ const JobPostings = () => {
             {loading && <div>Loading...</div>}
 
             {!loading && filteredJobs.length > 0 ? (
-                <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 auto-rows-fr mt-5">
+                <div className="grid grid-cols-1 sm:grid-cols-2 mb-8 lg:grid-cols-3 gap-6 auto-rows-fr mt-5">
                     {filteredJobs.map((job) => (
                         <Link
                             to={`/jobs/${job.id}`}
