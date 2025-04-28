@@ -19,8 +19,8 @@ const TopicChats = () => {
     <div className="flex justify-center w-full" style={{ height: "calc(100vh - 6rem)" }}>
       <div className="flex w-full max-w-[960px] h-full">
         {/* Sidebar */}
-        <aside className="hidden md:flex flex-col min-w-56 border-r border-[hsl(var(--border))] bg-[hsl(var(--background))] text-[hsl(var(--foreground))] overflow-hidden">
-          <div className="px-4 py-5 border-b border-[hsl(var(--border))] bg-[hsl(var(--muted))]">
+        <aside className="hidden md:flex flex-col min-w-56 border-r border-[hsl(var(--border))] bg-blue-50 overflow-hidden">
+          <div className="px-4 py-5 border-b border-[hsl(var(--border))] bg-blue-100">
             <h2 className="text-2xl font-bold text-center">Topics</h2>
           </div>
           <div className="flex-1 overflow-y-auto py-1">

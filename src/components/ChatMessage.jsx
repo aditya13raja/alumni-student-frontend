@@ -4,10 +4,10 @@ const ChatMessage = ({ chat, currentUsername }) => {
   // alignment & background
   const alignmentClass = isOwnMessage ? "justify-end" : "justify-start";
   const backgroundColor = isOwnMessage
-    ? "#064e3b" // dark green
+    ? "#d6eff1" // light green
     : chat.role === "alumni"
-    ? "#1e3a8a" // dark blue
-    : "#000000"; // black
+    ? "#eaeff9" // light blue
+    : "#fff"; // white
 
   const formattedTime = new Date(chat.Timestamp).toLocaleTimeString([], {
     hour: "2-digit",
@@ -20,11 +20,11 @@ const ChatMessage = ({ chat, currentUsername }) => {
         className="px-4 py-2 my-2 rounded-lg text-sm shadow max-w-[80%]"
         style={{
           backgroundColor,
-          color: "#f9e8e1",
+          color: "#1f2937", // dark gray text for contrast
         }}
       >
         {!isOwnMessage && (
-          <h3 className="font-semibold text-xs text-gray-300 mb-1">
+          <h3 className="font-semibold text-xs text-gray-700 mb-1">
             {chat.username}
           </h3>
         )}
@@ -32,7 +32,7 @@ const ChatMessage = ({ chat, currentUsername }) => {
         <div className="text-[10px] text-right opacity-70">{formattedTime}</div>
       </div>
     </div>
-      );
+  );
 };
 
 export default ChatMessage;

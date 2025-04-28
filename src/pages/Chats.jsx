@@ -93,9 +93,9 @@ const Chats = () => {
     };
 
     return (
-    <div className="flex flex-col w-full min-w-sm h-full bg-[hsl(var(--background))] text-[hsl(var(--foreground))]">
+    <div className="flex flex-col w-full min-w-sm h-full bg-blue-50 text-[hsl(var(--foreground))]">
       {/* Header */}
-      <header className="px-6 py-4 border-b border-[hsl(var(--border))] shadow-sm bg-[hsl(var(--muted))]">
+      <header className="px-6 py-4 border-b border-[hsl(var(--border))] shadow-sm bg-blue-100">
         <h1 className="text-2xl md:text-3xl font-semibold text-center uppercase">{topic}</h1>
       </header>
 
@@ -123,7 +123,7 @@ const Chats = () => {
       {/* Chat Input */}
       <form
         onSubmit={handleSendMessage}
-        className="w-full sticky bottom-0 px-4 md:px-8 py-4 bg-[hsl(var(--muted))] border-t border-[hsl(var(--border))] flex items-center gap-3"
+        className="w-full sticky bottom-0 px-4 md:px-8 py-4 bg-blue-100 border-t border-[hsl(var(--border))] flex items-center gap-3"
       >
         <input
           type="text"
@@ -134,7 +134,7 @@ const Chats = () => {
         />
         <button
           type="submit"
-          className="p-3 rounded-xl bg-[hsl(var(--primary))] hover:bg-[hsl(var(--primary)/90)] text-white transition"
+          className="p-3 rounded-xl bg-blue-100 border border-blue-400 hover:bg-[hsl(var(--primary)/90)] hover:text-white transition"
         >
           <Send size={16} />
         </button>
