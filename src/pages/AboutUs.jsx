@@ -1,6 +1,4 @@
-import React from 'react';
-import '../index.css';
-import img1 from '../assets/aditya.png'; // Change path according to your setup
+import img1 from '../assets/aditya.png';
 import img2 from '../assets/aman.jpg';
 import img3 from '../assets/snj.png';
 
@@ -17,23 +15,34 @@ const teamMembers = [
   },
   {
     name: 'Riya Singh',
-    description: ' An innovative front-end developer and data science student focused on building intuitive, visually engaging interfaces backed by data-driven insights to enhance user experiences worldwide.',
+    description: 'An innovative front-end developer and data science student focused on building intuitive, visually engaging interfaces backed by data-driven insights to enhance user experiences worldwide.',
     image: img3,
   },
 ];
 
 const AboutUs = () => {
   return (
-    <div className="about-mt">
-      <h1 className="text-4xl font-bold text-blue-900 mb-5 text-center text-italic tracking-tight">Meet Our Team</h1>
+    <div className="mx-auto px-4 py-5">
+      <h1 className="text-4xl font-bold text-blue-900 mb-10 text-center">
+        Meet Our Team
+      </h1>
       {teamMembers.map((member, index) => (
-        <div key={index} className={`about-member ${index % 2 === 0 ? 'left' : 'right'}`}>
-          <div className="about-image">
-            <img src={member.image} alt={member.name} />
+        <div
+          key={index}
+          className={`flex flex-col md:flex-row ${index % 2 !== 0 ? 'md:flex-row-reverse' : ''} items-center mb-16`}
+        >
+          <div className="flex-1 flex justify-center mb-6 md:mb-0">
+            <img
+              src={member.image}
+              alt={member.name}
+              className="w-80 h-80 object-cover rounded-full shadow-lg"
+            />
           </div>
-          <div className="about-content">
-          <h2><span className="font-bold">{member.name}</span></h2>
-            <p>{member.description}</p>
+          <div className="flex-1 px-4 text-center md:text-left">
+            <h2 className="text-2xl md:text-3xl font-bold mb-4">{member.name}</h2>
+            <p className="text-lg md:text-xl text-gray-600 leading-relaxed">
+              {member.description}
+            </p>
           </div>
         </div>
       ))}
@@ -42,3 +51,4 @@ const AboutUs = () => {
 };
 
 export default AboutUs;
+
