@@ -93,9 +93,9 @@ const ProfilePage = () => {
     };
 
     return (
-        <div className="min-h-screen w-full mt-4  items-center justify-center p-1">
+        <div className="min-h-screen w-full mt-4  items-center justify-center px-4 mb-16">
             <h1 className="text-4xl font-bold text-blue-900 mb-6 text-center">User Profile</h1>
-            <div className="w-full max-w-4xl p-10 rounded-3xl shadow-2xl border border-blue-100 bg-[hsl(var(--background))]/70 backdrop-blur-md ">
+            <div className="glass-card p-8" >
                 {loading && <p className="text-center text-gray-600 text-lg">Loading...</p>}
                 {error && <p className="text-center text-red-500 text-lg">{error}</p>}
 
@@ -124,7 +124,7 @@ const ProfilePage = () => {
                         <div className="grid grid-cols-1 md:grid-cols-2 gap-6 text-gray-800 text-base">
                             {["first_name", "last_name", "age", "degree", "major", "passing_year", "username", "email"].map((field) => (
                                 <div key={field}>
-                                    <label className="block font-semibold capitalize mb-1">
+                                    <label className="block font-semibold capitalize pl-1 mb-1">
                                         {field.replace("_", " ")}:
                                     </label>
                                     <input

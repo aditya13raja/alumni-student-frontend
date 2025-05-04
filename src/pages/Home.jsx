@@ -36,7 +36,7 @@ const Home = () => {
     }, []);
 
     return (
-        <div className="mt-5 ">
+        <div className="mt-5 px-4">
             {!loading && blogsList.length > 0 && (
                 <BlogsCarousel blogs={blogsList} />
             )}
@@ -61,7 +61,7 @@ const Home = () => {
 
             <footer className=" py-4 mt-10">
                 <div className="text-center">
-                    <p>&copy; {new Date().getFullYear()} Your Company. All Rights Reserved.</p>
+                    <p>&copy; {new Date().getFullYear()} Alumni Connect. All Rights Reserved.</p>
                     <Link
                         to="/about"
                         className="text-blue-400 hover:text-blue-600 transition"

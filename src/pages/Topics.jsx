@@ -25,7 +25,7 @@ const Topics = () => {
     }, []);
 
     return (
-        <div className="mt-5">
+        <div className="mt-5 pb-16">
             <h1 className="text-4xl text-blue-900 font-bold mb-6 text-center tracking-tight">
                 Topic Categories
             </h1>

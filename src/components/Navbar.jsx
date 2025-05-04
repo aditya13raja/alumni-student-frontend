@@ -69,7 +69,7 @@ export default function Navbar() {
         >
             {/* Desktop: icon above label */}
             <div className="hidden md:flex flex-col items-center justify-center px-3 py-2">
-                <div className="group-hover:scale-110 transition duration-200 text-[hsl(var(--foreground))]">
+                <div className="group-hover:scale-125 transition duration-200 text-[hsl(var(--foreground))]">
                     {icon}
                 </div>
                 <span className="mt-1 text-base">{label}</span>
@@ -107,7 +107,7 @@ export default function Navbar() {
                 <DropdownMenu>
                     <DropdownMenuTrigger asChild>
                         <div className="hidden md:flex items-center gap-2 text-[hsl(var(--foreground))] cursor-pointer">
-                            <FaCircleUser className="text-xl" />
+                            <FaCircleUser className="text-2xl" />
                             <span>{first_name}</span>
                             <span>{last_name}</span>
                         </div>
@@ -138,7 +138,7 @@ export default function Navbar() {
 
             {/* Mobile Menu */}
             {mobileMenuOpen && (
-                <div className="md:hidden px-4 pb-4 flex flex-col gap-3 bg-[hsl(var(--background))] border-t border-[hsl(var(--border))]">
+                <div className="md:hidden px-4 pb-4 flex flex-col gap-3 border-t bg-slate-200 text-[hsl(var(--foreground))] border-b border-[hsl(var(--border))]">
                     {navLinks.map(({ to, label, icon }) => (
                         <NavItem key={to} to={to} label={label} icon={icon} />
                     ))}

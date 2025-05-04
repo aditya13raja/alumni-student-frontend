@@ -93,53 +93,53 @@ const Chats = () => {
     };
 
     return (
-    <div className="flex flex-col w-full min-w-sm h-full bg-blue-50 text-[hsl(var(--foreground))]">
-      {/* Header */}
-      <header className="px-6 py-4 border-b border-[hsl(var(--border))] shadow-sm bg-blue-100">
-        <h1 className="text-2xl md:text-3xl font-semibold text-center uppercase">{topic}</h1>
-      </header>
+        <div className="flex flex-col w-full min-w-sm h-full text-[hsl(var(--foreground))]">
+            {/* Header */}
+            <header className="px-6 py-4 border-b border-[hsl(var(--border))] shadow-sm bg-blue-200/20">
+                <h1 className="text-2xl md:text-3xl font-semibold text-center uppercase">{topic}</h1>
+            </header>
 
-      {/* Chat Messages */}
-      <div className="flex-1 flex flex-col overflow-y-scroll p-4 md:p-8 space-y-4">
-        {loading ? (
-          <div className="flex-1 flex justify-center items-center text-muted-foreground text-lg">Loading...</div>
-        ) : chats.length === 0 ? (
-          <div className="flex-1 flex justify-center items-center text-muted-foreground text-lg">No messages yet</div>
-        ) : (
-          Object.entries(groupedChats).map(([date, msgs]) => (
-            <div key={date}>
-              <div className="text-center text-xs text-muted-foreground my-4">
-                <span className="bg-[hsl(var(--muted))] px-4 py-1 rounded-full">{date}</span>
-              </div>
-              {msgs.map((chat) => (
-                <ChatMessage key={chat.id} chat={chat} currentUsername={username} />
-              ))}
+            {/* Chat Messages */}
+            <div className="flex-1 flex flex-col overflow-y-scroll p-4 md:p-8 space-y-4">
+                {loading ? (
+                    <div className="flex-1 flex justify-center items-center text-muted-foreground text-lg">Loading...</div>
+                ) : chats.length === 0 ? (
+                        <div className="flex-1 flex justify-center items-center text-muted-foreground text-lg">No messages yet</div>
+                    ) : (
+                            Object.entries(groupedChats).map(([date, msgs]) => (
+                                <div key={date}>
+                                    <div className="text-center text-xs text-muted-foreground my-4">
+                                        <span className="bg-[hsl(var(--muted))] px-4 py-1 rounded-full">{date}</span>
+                                    </div>
+                                    {msgs.map((chat) => (
+                                        <ChatMessage key={chat.id} chat={chat} currentUsername={username} />
+                                    ))}
+                                </div>
+                            ))
+                        )}
+                <div ref={bottomRef} />
             </div>
-          ))
-        )}
-        <div ref={bottomRef} />
-      </div>
 
-      {/* Chat Input */}
-      <form
-        onSubmit={handleSendMessage}
-        className="w-full sticky bottom-0 px-4 md:px-8 py-4 bg-blue-100 border-t border-[hsl(var(--border))] flex items-center gap-3"
-      >
-        <input
-          type="text"
-          className="flex-1 px-4 py-2 rounded-xl border border-[hsl(var(--border))] bg-[hsl(var(--background))] text-[hsl(var(--foreground))] placeholder:text-muted-foreground focus:outline-none focus:ring-2 focus:ring-[hsl(var(--primary))] transition"
-          placeholder="Type a message..."
-          value={message}
-          onChange={(e) => setMessage(e.target.value)}
-        />
-        <button
-          type="submit"
-          className="p-3 rounded-xl bg-blue-100 border border-blue-400 hover:bg-[hsl(var(--primary)/90)] hover:text-white transition"
-        >
-          <Send size={16} />
-        </button>
-      </form>
-    </div>
+            {/* Chat Input */}
+            <form
+                onSubmit={handleSendMessage}
+                className="w-full sticky bottom-0 px-4 md:px-8 py-4 bg-blue-200/20 border-t border-[hsl(var(--border))] flex items-center gap-3"
+            >
+                <input
+                    type="text"
+                    className="flex-1 px-4 py-2 rounded-xl border border-[hsl(var(--border))] bg-blue-200/10 text-[hsl(var(--foreground))] placeholder:text-muted-foreground focus:outline-none focus:ring-2 focus:ring-[hsl(var(--primary))] transition"
+                    placeholder="Type a message..."
+                    value={message}
+                    onChange={(e) => setMessage(e.target.value)}
+                />
+                <button
+                    type="submit"
+                    className="p-3 rounded-xl bg-blue-200/20 border border-blue-400 hover:bg-[hsl(var(--primary)/90)] hover:text-white transition"
+                >
+                    <Send size={16} />
+                </button>
+            </form>
+        </div>
     );
 };
 

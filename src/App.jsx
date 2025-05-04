@@ -23,7 +23,7 @@ function MainLayout() {
     return (
         <div className="flex flex-col min-h-screen bg-[var(--bg-color)] text-[var(--text-color)]">
             <Navbar />
-            <div className="flex-1 p-1 max-w-[960px] px-5 mx-auto ">
+            <div className="flex-1 p-1 max-w-[960px] mx-auto ">
                 <Outlet /> {/* Nested routes will render here */}
             </div>
         </div>

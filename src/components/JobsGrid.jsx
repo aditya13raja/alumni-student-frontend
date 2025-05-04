@@ -4,7 +4,7 @@ const JobGrid = ({ jobs }) => {
     return (
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
             {jobs.map((job) => (
-                <div key={job.id} className="border border-blue-100 bg-[hsl(var(--background))]/70 shadow-md rounded-xl p-4 space-y-3 hover:shadow-xl hover:scale-105 transition">
+                <div key={job.id} className="glass-card p-4 hover:scale-103">
                     <Link to={`/jobs/${job.id}`} className='space-y-2'>
                         <h2 className="text-lg truncate font-bold  text-[hsl(var(--foreground))]">
                             {job.job_role}

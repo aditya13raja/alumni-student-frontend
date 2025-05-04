@@ -1,10 +1,9 @@
-import { useParams, Outlet, Link, useNavigate } from "react-router-dom";
+import { useParams, Outlet, Link } from "react-router-dom";
 import { useState, useEffect } from "react";
 
 const TopicChats = () => {
     const { category } = useParams();
     const [topics, setTopics] = useState([]);
-    const navigate = useNavigate();
 
     useEffect(() => {
         const fetchTopics = async () => {
@@ -19,8 +18,8 @@ const TopicChats = () => {
     <div className="flex justify-center w-full" style={{ height: "calc(100vh - 6rem)" }}>
       <div className="flex w-full max-w-[960px] h-full">
         {/* Sidebar */}
-        <aside className="hidden md:flex flex-col min-w-56 border-r border-[hsl(var(--border))] bg-blue-50 overflow-hidden">
-          <div className="px-4 py-5 border-b border-[hsl(var(--border))] bg-blue-100">
+        <aside className="hidden md:flex flex-col min-w-56 border-r border-slate-200 bg-blue-200/10 shadow-lg overflow-hidden">
+          <div className="px-4 py-5 border-b border-[hsl(var(--border))] bg-blue-200/20">
             <h2 className="text-2xl font-bold text-center">Topics</h2>
           </div>
           <div className="flex-1 overflow-y-auto py-1">
@@ -31,7 +30,7 @@ const TopicChats = () => {
                 <Link
                   key={topic.id}
                   to={`/topics/${category}/${topic.topic_name}`}
-                  className="block py-3 text-[hsl(var(--foreground))] hover:bg-[hsl(var(--muted-foreground))]/10 transition font-medium"
+                  className="block py-3 text-[hsl(var(--foreground))] hover:bg-[hsl(var(--muted-foreground))]/05 transition font-medium"
                 >
                   <div className="text-xl font-normal px-4">{topic.topic_fullname}</div>
                 </Link>

@@ -22,7 +22,7 @@ const JobDescription = () => {
     if (!job) return <div className="text-center mt-10 text-gray-500">Loading...</div>;
 
     return (
-        <div className="mx-auto w-full p-6 bg-white shadow-xl rounded-lg mt-10 space-y-6">
+        <div className="mx-auto w-full p-6 my-10 space-y-6">
             <div className="flex justify-between items-start gap-6">
                 <h1 className="text-3xl font-bold text-blue-800">{job.job_role}</h1>
                 {job.job_link && (
@@ -30,7 +30,7 @@ const JobDescription = () => {
                         href={job.job_link}
                         target="_blank"
                         rel="noopener noreferrer"
-                        className="bg-green-600 hover:bg-green-700 text-white font-semibold px-4 py-2 rounded-md shadow-sm transition"
+                        className="hover:scale-110 border border-blue-400 hover:text-white font-semibold px-4 py-2 rounded-md shadow-sm transition"
                     >
                         Apply Now
                     </a>

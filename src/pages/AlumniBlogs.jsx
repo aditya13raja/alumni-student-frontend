@@ -24,7 +24,7 @@ const AlumniBlogs = () => {
     );
 
     return (
-        <div className="mt-5">
+        <div className="mt-5 pb-16 px-4">
             <h1 className="text-4xl font-bold text-blue-900 mb-6 text-center tracking-tight">
                 Alumni Blogs
             </h1>
@@ -47,9 +47,9 @@ const AlumniBlogs = () => {
                         <Link
                             to={`/blogs/${blog.id}`}
                             key={blog.id}
-                            className="border border-blue-100 bg-[hsl(var(--background))]/70 backdrop-blur-md shadow-sm rounded-xl overflow-hidden hover:shadow-lg hover:scale-105 transition"
+                            className="glass-card hover:scale-103"
                         >
-                            <img src={blog.cover_image} alt="cover" className="w-full h-48 object-cover" />
+                            <img src={blog.cover_image} alt="cover" className="w-full h-48 object-cover rounded-t-2xl" />
                             <div className="p-4 space-y-2">
                                 <h2 className="text-lg font-bold line-clamp-2">{blog.heading}</h2>
                                 <p className="text-sm text-[hsl(var(--muted-foreground))] ">By {blog.username}</p>

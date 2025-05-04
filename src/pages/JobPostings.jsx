@@ -38,7 +38,7 @@ const JobPostings = () => {
     });
 
     return (
-        <div className="mt-5">
+        <div className="mt-5 pb-16 px-4">
             <h1 className="text-4xl font-bold text-blue-900 mb-6 text-center tracking-tight">
                 Job Postings
             </h1>
@@ -83,18 +83,18 @@ const JobPostings = () => {
                         <Link
                             to={`/jobs/${job.id}`}
                             key={job.id}
-                            className="border border-blue-100 bg-[hsl(var(--background))]/70 min-w-64 shadow-md rounded-xl p-4 space-y-3 hover:shadow-xl hover:scale-105 transition"
+                            className="glass-card p-4 space-y-2 hover:scale-103"
                         >
                             <h2 className="text-lg truncate font-bold text-[hsl(var(--foreground))]">
                                 {job.job_role}
                             </h2>
                             <p className="text-md font-semibold text-[hsl(var(--muted-foreground))] ">{job.company_name}</p>
 
-                            <div className="flex gap-2 text-xs">
+                            <div className="flex gap-2 text-sm">
                                 <span className="bg-blue-100 px-2 py-1 rounded-full">
                                     {job.job_type}
                                 </span>
-                                <span className="bg-green-100 px-2 py-1 rounded-full">
+                                <span className="bg-teal-100 px-2 py-1 rounded-full">
                                     {job.job_mode}
                                 </span>
                             </div>
@@ -107,7 +107,7 @@ const JobPostings = () => {
                                 href={job.job_link}
                                 target="_blank"
                                 rel="noopener noreferrer"
-                                className="text-center w-full border border-green-300 p-2 rounded-md  hover:bg-green-300"
+                                className="text-center w-full border border-blue-300 p-2 rounded-md  hover:bg-blue-300"
                             >
                                 Apply Now
                             </a>
