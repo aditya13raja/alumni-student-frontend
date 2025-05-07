@@ -20,7 +20,7 @@ const MenuBar = ({ editor, onSubmit }) => {
     if (!editor) return null;
 
     const baseBtn =
-        "border border-gray-300 px-2 py-1 rounded hover:bg-gray-100 transition-colors duration-150 flex items-center gap-1";
+        "border border-gray-300 px-2 py-1 rounded hover:bg-gray-300 transition-colors duration-150 flex items-center gap-1";
 
     const isActive = (name, attrs = {}) => editor.isActive(name, attrs);
 
@@ -77,7 +77,7 @@ const MenuBar = ({ editor, onSubmit }) => {
 
             <button
                 onClick={() => editor.chain().focus().toggleHighlight().run()}
-                className={`${baseBtn} ${isActive('highlight') ? 'bg-yellow-200' : ''}`}
+                className={`${baseBtn} ${isActive('highlight') ? 'bg-violet-200' : ''}`}
             >
                 <Highlighter />
             </button>

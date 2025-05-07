@@ -110,18 +110,24 @@ html, body {
 
 @layer base {
     h1 {
-        @apply text-2xl font-bold;
+        @apply text-2xl text-blue-800;
     }
     h2 {
-        @apply text-xl font-bold;
+        @apply text-xl text-blue-800;
     }
     h3 {
-        @apply text-lg font-bold;
+        @apply text-lg text-blue-800;
     }
     ul {
         @apply list-disc ml-5;
     }
     ol {
         @apply list-decimal ml-5;
+    }
+     u {
+        @apply underline;
+    }
+    mark {
+        @apply bg-violet-200;
     }
 }

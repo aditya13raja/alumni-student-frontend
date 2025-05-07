@@ -4,10 +4,6 @@ import StarterKit from '@tiptap/starter-kit'
 import TextAlign from '@tiptap/extension-text-align'
 import Highlight from '@tiptap/extension-highlight'
 import Underline from '@tiptap/extension-underline'
-import BulletList from '@tiptap/extension-bullet-list'
-import OrderedList from '@tiptap/extension-ordered-list'
-import Heading from '@tiptap/extension-heading'
-import Paragraph from '@tiptap/extension-paragraph'
 import { useSelector } from 'react-redux'
 import MenuBar from '../components/MenuBar'
 import { useNavigate } from 'react-router-dom'
@@ -22,11 +18,13 @@ const BlogEditor = () => {
 
     const navigate = useNavigate();
 
-    const boxStyle = "tiptap w-full border border-blue-100 p-4 shadow-lg rounded-lg mt-6 bg-white/40";
+    const boxStyle = "tiptap w-full border border-blue-100 p-4 shadow-lg rounded-lg mt-6 bg-white/40 focus:outline-none";
 
     const editor = useEditor({
         extensions: [
             StarterKit,
+            Highlight,
+            Underline,
             TextAlign.configure({ types: ['heading', 'paragraph'] })
         ],
         content: '<p>Start writing your blog...</p>',
