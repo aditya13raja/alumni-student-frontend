@@ -22,20 +22,19 @@ const BlogEditor = () => {
 
     const navigate = useNavigate();
 
-    const boxStyle = "tiptap w-full border border-blue-100 p-4 shadow-lg rounded-md mt-6 bg-white";
+    const boxStyle = "tiptap w-full border border-blue-100 p-4 shadow-lg rounded-lg mt-6 bg-white/40";
 
     const editor = useEditor({
         extensions: [
-            StarterKit.configure({ heading: true, paragraph: false }),
-            Heading.configure({ levels: [1, 2, 3] }),
-            Paragraph,
-            Highlight,
-            Underline,
-            BulletList,
-            OrderedList,
+            StarterKit,
             TextAlign.configure({ types: ['heading', 'paragraph'] })
         ],
         content: '<p>Start writing your blog...</p>',
+        editorProps: {
+            attributes: {
+                class: boxStyle,
+            },
+        },
     })
 
     const handleSubmit = async () => {
@@ -78,7 +77,7 @@ const BlogEditor = () => {
 
             <MenuBar editor={editor} onSubmit={handleSubmit} />
 
-            <div className={boxStyle}>
+            <div >
                 <EditorContent editor={editor} />
             </div>
         </div>
