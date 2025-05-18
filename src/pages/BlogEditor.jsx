@@ -8,8 +8,6 @@ import { useSelector } from 'react-redux'
 import MenuBar from '../components/MenuBar'
 import { useNavigate } from 'react-router-dom'
 
-
-
 const BlogEditor = () => {
     const [heading, setHeading] = useState('')
     const [coverImage, setCoverImage] = useState('')
@@ -18,7 +16,8 @@ const BlogEditor = () => {
 
     const navigate = useNavigate();
 
-    const boxStyle = "tiptap w-full border border-blue-100 p-4 shadow-lg rounded-lg mt-6 bg-white/40 focus:outline-none";
+    const boxStyle = "w-full border border-blue-100 p-4 shadow-lg rounded-lg mt-6 bg-white/40 focus:outline-none";
+    const blogStyle = "tiptap w-full min-h-[196px] border border-blue-100 p-4 shadow-lg rounded-lg mt-6 bg-white/40 focus:outline-none";
 
     const editor = useEditor({
         extensions: [
@@ -30,7 +29,7 @@ const BlogEditor = () => {
         content: '<p>Start writing your blog...</p>',
         editorProps: {
             attributes: {
-                class: boxStyle,
+                class: blogStyle,
             },
         },
     })
@@ -49,7 +48,6 @@ const BlogEditor = () => {
         navigate(`/blogs/${data.id}`)
         console.log(data)
     }
-
 
     return (
         <div className="mt-5 max-w-4xl mx-auto px-4">
