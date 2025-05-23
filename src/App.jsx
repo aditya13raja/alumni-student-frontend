@@ -17,6 +17,7 @@ import AlumniBlogs from "./pages/AlumniBlogs";
 import PostJob from "./pages/PostJob";
 import JobDescription from "./pages/JobDescription";
 import AboutUs from "./pages/AboutUs";
+import AlumniList from "./pages/AlumniList";
 
 // Layout for authenticated pages (with sidebar)
 function MainLayout() {
@@ -55,7 +56,7 @@ function App() {
                         <Route path="/" element={<Home />} />
                         <Route path="/:username" element={<Profile />} />
                         <Route path="/resources" element={<Resources />} />
-                        <Route path="/roadmaps" element={<Roadmap />} />
+                        <Route path="/alumni-list" element={<AlumniList />} />
 
                         <Route path="/topics" element={<Topics />} />
                         <Route path="/topics/:category" element={<TopicChats />}>

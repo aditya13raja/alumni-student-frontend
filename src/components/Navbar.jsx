@@ -10,13 +10,12 @@ import {
 import {
     FaSearch,
     FaDatabase,
-    FaRoad,
     FaSuitcase,
     FaBars,
     FaTimes,
     FaBookOpen,
 } from "react-icons/fa";
-import { FaCircleUser } from "react-icons/fa6";
+import { FaCircleUser, FaPeopleGroup } from "react-icons/fa6";
 import { useDispatch, useSelector } from "react-redux";
 import {
     signOutUserFailure,
@@ -57,7 +56,7 @@ export default function Navbar() {
         { to: "/topics", label: "Topics", icon: <FaSearch /> },
         { to: "/resources", label: "Resources", icon: <FaDatabase /> },
         { to: "/blogs", label: "Blogs", icon: <FaBookOpen/> },
-        { to: "/roadmaps", label: "Roadmap", icon: <FaRoad /> },
+        { to: "/alumni-list", label: "Alumni List", icon: <FaPeopleGroup /> },
         { to: "/jobs", label: "Jobs", icon: <FaSuitcase /> },
         { to: "/about", label: "About Us", icon: <FaCircleUser /> },
     ];
