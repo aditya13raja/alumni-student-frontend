@@ -6,7 +6,6 @@ import SignUp from "./pages/SignUp";
 import JobPostings from "./pages/JobPostings";
 import Topics from "./pages/Topics";
 import Resources from "./pages/Resources";
-import Roadmap from "./pages/Roadmap";
 import Chats from "./pages/Chats";
 import PrivateRoute from "./components/PrivateRoute";
 import Navbar from "./components/Navbar";
