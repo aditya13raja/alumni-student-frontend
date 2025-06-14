@@ -3,6 +3,9 @@
 This is the frontend for the **Alumni-Student Portal**, a platform designed to connect current students with alumni. Users can interact via blogs, chats, job postings, and topic-based discussions.
 ---
 
+# Backend repo
+  [Alumni-student-backend](https://github.com/aditya13raja/alumni-student-backend)
+
 ## 🚀 Features
 
 - 🔐 **Authentication** via JWT
