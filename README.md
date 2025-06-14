@@ -130,11 +130,4 @@ This project is licensed under the MIT License. See the [LICENSE](./LICENSE) fil
 
 ## 📬 Contact
 
-Feel free to reach out via [issues](https://github.com/aditya13raja/alumni-student-frontend/issues) or connect via LinkedIn!
-
-```
-
----
-
-Let me know if you'd like to include a [contribution guide](f), [deployment steps](f), or [project screenshots](f).
-```
+Feel free to reach out via [issues](https://github.com/aditya13raja/alumni-student-frontend/issues) or connect via [LinkedIn](https://www.linkedin.com/in/adirajdev/)!
