@@ -60,18 +60,19 @@ This is the frontend for the **Alumni-Student Portal**, a platform designed to c
    Create a `.env` file:
 
    ```env
-   VITE_API_BASE_URL=https://your-backend-domain.com/api
-   VITE_PUSHER_APP_KEY=your-pusher-key
-   VITE_PUSHER_CLUSTER=your-cluster
-   ```
+   VITE_PUSHER_KEY
+   VITE_PUSHER_CLUSTER
+   VITE_SUPABASE_URL
+   VITE_SUPABASE_ANON_KEY
+```
 
 4. **Run the development server**
 
-   ```bash
-   npm run dev
-   # or
-   yarn dev
-   ```
+```bash
+npm run dev
+# or
+yarn dev
+```
 
 ---
 
